@@ -148,7 +148,6 @@ class Backend:
         }
             
         }
-        # count_tokens_response=requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:countTokens?key="+self.api_key,json=data1,headers=headers)
         
         if(self.count_tokens(self.messages)<30720):
             response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" +self.api_key, json=data)
