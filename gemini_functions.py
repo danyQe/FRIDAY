@@ -13,14 +13,13 @@ import datetime
 from googletrans import Translator 
 from  PIL import Image,ImageTk
 import psutil
-# from deepface import DeepFace
+from deepface import DeepFace
 from pathlib import Path
-# import screen_brightness_control as sbc 
+import screen_brightness_control as sbc 
 import cv2
 import tkinter as tk
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options as EdgeOptions
-# from selenium.webdriver.common.by import By
 import requests
 from dotenv import load_dotenv
 import os
