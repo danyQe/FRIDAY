@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+    <!-- <link rel="icon" href="logo.png" type="image/png"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" -->
+        <!-- integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}"> -->
+    <!-- <script src="{{ url_for('static', filename='script.js')}}"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='input_style.css')}}">
+    <script src="{{ url_for('static', filename='input_script.js')}}" defer></script>
+</head>
+
+<body>
+    <nav>
+        <a href="http://localhost:5000/">Home</a>
+        <a href="http://localhost:5000/documentation">Documentation</a>
+        <a href="http://localhost:5000/about">About us</a>
+        <a href="http://localhost:5000/contact">Contact us</a>
+    </nav>
+    <br>
+    <div id="buttons">
+        <button id="restart-button">Restart</button>
+    </div>
+    <div id="display-message">
+        <h2>Ask me Something😃😃!!</h2>
+    </div>
+    <video id="video-background" autoplay muted loop>
+        <source src="/static/2.mp4" type="video/mp4">
+    </video>
+    <div id="microphone-container-full">
+        <div id="microphone-container">
+            <div class="close-button" id="close-button">&times;</div>
+            <br>
+            <div class="microphone" id="microphone"></div>
+            <br>
+            <div id="voice-wave-container">
+                <div id="bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chat-box-container">
+        <div class="chat-box" id="chatbox">
+            <p class="botText">
+            </p>
+        </div>
+    </div>
+    </div>
+    <br>
+    <div id="input-box-container">
+        <div id="pdf-container"><h2>Upload pdf here:</h2><br><input type="file"value="upload pdf" id="file-input"> <button id="upload">upload</button></div>
+        <div id="upload-button"></div>
+        <textarea id="text-box" placeholder="Enter a command or ask something! 😀"></textarea>
+        <button type="button" id="text-button">Submit</button>
+    </div>
+</body>
+
+</html>

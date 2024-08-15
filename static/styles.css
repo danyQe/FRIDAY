@@ -1,0 +1,394 @@
+html
+{
+  scroll-behavior: smooth;
+}
+*{
+        margin: 0;
+         padding: o;
+        font-family: sans-serif;
+    }
+    nav{
+        display: flex;
+        align-items:center;
+        justify-content:space-around;
+        flex-direction: row;
+        height:12vh;
+        background-color:#ffffff52;
+    }
+    nav a
+    {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.51);
+      font-family:Arial, Helvetica, sans-serif;
+      font-size: 25px;
+      font-weight: bold;
+    
+    }
+    nav a:hover{
+      color:#f4aa61db;
+      background-color: #ffffff00;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0);
+    }
+body{
+  background-color: #f5eded;
+}
+.hero{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow:hidden;
+        background-color: #1313131b;
+}
+.hero-video {
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top:12%;
+    width: 100%;
+    height: 90%;
+    z-index: -4;
+    
+}
+
+.hero h2
+{
+  color:rgba(234, 229, 229, 0.579);
+  font-family:math;
+    font-size:40px; 
+}
+.start-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    #start-button {
+      background-color:#00ff5ff2;
+      color: rgb(43, 42, 42);
+      border: 2px solid transparent;
+    padding: 5px;
+    border-radius: 15px;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 19px;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    animation: pulse 0.5s alternate infinite; /* Add CSS animation */
+    animation-delay: 5s; /* Delay the animation start by 5 seconds */
+    animation-iteration-count: infinite; /* Set to infinite to continue animation */
+    animation-duration: 5s; /* Duration of each animation loop */
+  }
+  a{
+    cursor: pointer;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+      }
+    }
+    
+    #start-button:hover {
+      background-color: #f22626df;
+      color: rgb(255, 255, 255);
+        border-color: rgb(23, 23, 23);
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .word {
+        margin: auto;
+        position:absolute;
+        top:40%;
+        left:5%;
+        transform :translateY(-50%);
+        z-index:0;
+        height:25%;
+        color: white;
+        font: 700 normal 2.5em ;
+        font-size: 50px;
+        text-shadow: 5px 2px #222324, 2px 4px #222324, 3px 5px #222324;
+      }
+      .logo
+      {
+        width:2%;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+      }
+      .links
+      {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .start-button-container{
+        position:absolute;
+        top:60%;
+        left:5%;
+      }
+
+      
+      
+    
+    footer
+    {
+      background-color: black;
+      color: white;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+    }
+    img{
+      width:100px;
+    }
+    main {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 20px;
+      max-width: 800px;
+    margin: 0 auto;
+    margin-top:20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #252222;
+      font-size: 28px;
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .popup-content {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      padding: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index:5;
+      transform: translate(-50%, -50%);
+    }
+    
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .close:hover{
+      color:white;
+      background-color: red;
+    }
+    
+    .start-button-container {
+      margin-top: 50px;
+      text-align: center;
+    }
+    .popup h2{
+      color:black;
+    }
+    #confirmButton{
+      background-color:#00ff5ff2;
+      width:50px;
+      border-radius:7px;
+      padding:5px;
+      cursor: pointer;
+      
+    }
+    #confirmButton:hover{
+      background-color:#f22626df;
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .confirm-box-container
+    {
+      display: flex;
+      justify-content: center;
+    }
+    .settings {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 2px solid black;
+      z-index: 1000;
+    }
+    /* Styles for the input fields */
+    .settings input[type="text"] {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    /* Styles for the submit button */
+    .settings input[type="submit"] {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .arrow {
+      border: solid rgb(253, 253, 253);
+      border-width: 0 5px 5px 0;
+      display: inline-block;
+      padding: 10px;
+      z-index: 3;
+      position:absolute;
+      bottom: 0;
+      right:50%;
+    }
+    .up {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+    /* HTML: <div class="loader"></div> */
+.loader {
+  --d:22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  color: #25b09b;
+  box-shadow: 
+    calc(1*var(--d))      calc(0*var(--d))     0 0,
+    calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+    calc(0*var(--d))      calc(1*var(--d))     0 2px,
+    calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+    calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+    calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+    calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+  animation: l27 1s infinite steps(8);
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+}
+@keyframes l27 {
+  100% {transform: rotate(1turn)}
+}
+
+#disagreeButton{
+  background-color:#ed1515f2;
+      width:100px;
+      border-radius:7px;
+      font-size:10px;
+      padding:5px;
+      cursor: pointer;
+      color: white;
+}
+#disagreeButton:hover{
+  background-color: rgba(0, 250, 50, 0.727);
+  color: #000000;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.popup-button-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+@media (max-width: 768px) {
+  .word {
+    font-size: 2em; /* Adjust the font size for smaller screens */
+  }
+  .logo{
+    width:auto;
+  }
+  nav a{
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.51);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+  }
+  nav{
+    display: flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-direction: row;
+    height:5vh;
+    background-color:#ffffff52;
+}
+.hero-video {
+  object-fit:fill;
+  position: absolute;
+  left: 0;
+  top:5%;
+  width: 100%;
+  height: 90%;
+  z-index: -4;
+  
+}
+.popup-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height:30%;
+  width:70%;
+  z-index:5;
+  transform: translate(-50%, -50%);
+}
+.popup-content p {
+    font-size: 8px;
+}
+.popup-content h2
+{
+  font-size: medium;
+}
+#confirmButton{
+  width:50px;
+  height:auto;
+  padding: 2px;
+}
+#disagreeButton{
+  background-color:#ed1515f2;
+      width:100px;
+      border-radius:7px;
+      font-size:10px;
+      padding:2px;
+      cursor: pointer;
+      color: white;
+}
+}

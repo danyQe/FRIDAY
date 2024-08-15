@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssistX Documentation</title>
+    <link rel="icon" href="/static/logo.png" type="image/png">
+    <style>
+        /* Reset some default styles */
+        body,
+        h1,
+        h2,
+        p,
+        ul,
+        ol,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* Prevent side scrolling */
+        }
+
+        header {
+            background-color: #11ed9c;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background-color: #333;
+            /* Change the background color */
+            /* border: 2px solid #000000; 
+            padding: 10px;  */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            /* Add a box shadow */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            /* Center-align the navigation links horizontally */
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            transition: color 0.3s;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: none;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            background-color: #333;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin-bottom: 10px;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .hamburger-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+            height: auto;
+            width: auto;
+        }
+
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* margin-top: 10px; */
+            padding: 20px;
+            overflow-x: hidden;
+            /* Prevent side scrolling */
+        }
+
+        .sidebar {
+            width: auto;
+            background-color: #333;
+            color: #fff;
+            padding-left: 20px;
+            padding-right: 20px;
+            transition: width 0.3s ease;
+
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .content {
+            flex: 1;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        section {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container {
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        nav a:hover {
+        color: #15d36b;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 1;
+            position: absolute;
+            margin-left: 0px;
+            margin-top: 5px;
+            width: 90%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links.active {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                background-color: transparent;
+                padding: 0;
+                box-shadow: none;
+                width: auto;
+            }
+
+            .nav-links li {
+                margin-bottom: 0;
+                margin-right: 20px;
+            }
+
+            .content-container {
+                padding: 20px 10px;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 0;
+            }
+
+            .content {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            footer {
+                padding: 10px;
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="logo">AssistX Documentation</h1>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:5000">Home</a></li>
+                <li><a href="http://localhost:5000/about">About us</a></li>
+                <li><a href="http://localhost:5000/contact">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav>
+        <div class="hamburger-menu" onclick="toggleSidebar()">
+            &#9776;
+        </div>
+        
+    </nav>
+
+    <div class="content-container">
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#technologies">Technologies Used</a></li>
+                <li><a href="#implementation">Implementation</a></li>
+                <li><a href="#user-guide">User Guide</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>
+                    In this peoject, we aim to develop a sophisticated and user friendly virtual assistant using python
+                    and website based GUI(Graphical User Interface) that can perform various tasks through both voice
+                    command and text input. The virtual assistant will leverage GEMINI PRO 1.5 language model to process
+                    user input and provide contextual responses. The primary objective is to create an intuitive and
+                    efficient system that can cater the user needs in an interactive manner.</p>
+            </section>
+
+            <section id="architecture">
+                <h2>Architecture</h2>
+                <p>
+                    The Web-Based Virtual Assistant uses a client-server architecture. The server is built with Flask, a
+                    Python web framework, and serves as the backend. The frontend is designed with HTML, CSS, and
+                    JavaScript. Voice recognition and processing logic are handled on the server.
+                </p>
+
+                <div class="image-container">
+                    <img src="/static/flowchart.png" alt="Architecture Diagram">
+                </div>
+
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+                <ul>
+                    <li>Voice recognition for user commands</li>
+                    <li>Text input for user interaction</li>
+                    <li>Integration with GEMINI PRO 1.5. forLarge Language Model</li>
+                    <li><strong>play music</strong>
+                        plays music from spotify application</li>
+                    <li><strong>Send Whatsapp message</strong>
+                        This function is used to send whatsapp messages.</li>
+                    <li><strong>Open Application</strong>
+                        This is the function to open an application using pyautogui. pyautogui is used to search
+                        the application</li>
+                    <li><strong>Search in Google</strong>
+                        This function is used to search the query on the internet and returns the descriptive output.
+                    </li>
+                    <li><strong>Get Name</strong>
+                        This is the function which reads the face of the person and returns his name,emotion,age and
+                        gender .This function uses deepface model to recognise the emotion,age and gender.</li>
+                    <li><strong>Write Program</strong>
+                        This function is used to write a program and save it in a file.</li>
+                    <li><strong>Read program files</strong>
+                        Reads the program from the file .it may be in any language in your knowledge</li>
+                </ul>
+            </section>
+
+            <section id="technologies">
+                <h2>Technologies Used</h2>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>(Front-End)</li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>(Front-End)</li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>(Front-End)</li>
+                    <li><a href="https://www.python.org/">Python</a> (Backend)</li>
+                    <li><a href="https://github.com/KoljaB/RealtimeTTS">RealTimeTTS</a> (Text-to-Speech Conversion)</li>
+                    <li><a
+                            href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition">webkit-SpeechRecognition</a>
+                        (Voice Recognition)</li>
+                    <li><a href="https://github.com/serengil/deepface/blob/master/deepface/DeepFace.py">DeepFace</a>
+                        (Face detection)</li>
+                    <li><a href="https://ai.google.dev/docs">GEMINI Pro 1.5</a>(Large Language Model)</li>
+                    <li><a href="https://flask.palletsprojects.com/">Flask </a>(Interfacing backend with frontend)</li>
+                    <!-- Add more technologies as needed -->
+                </ul>
+            </section>
+
+            <section id="libraries-used">
+                <h2>Technologies and Libraries Used</h2>
+
+                <h2>1. HTML (Hypertext Markup Language):</h2>
+                <ul>
+                    <li>HTML is the standard markup language for creating web pages and web applications.</li>
+                    <li>It provides the structure and content of a web page, defining elements such as headings,
+                        paragraphs, links, images, and forms.</li>
+                    <!-- Add more points as needed -->
+                </ul>
+
+                <h2>2. CSS (Cascading Style Sheets):</h2>
+                <ul>
+                    <li>CSS is a stylesheet language used to describe the presentation and styling of HTML documents.
+                    </li>
+                    <li>It allows developers to control the layout, appearance, and behavior of web pages, including
+                        aspects such as colors, fonts, spacing, and positioning.</li>
+                    <!-- Add more points as needed -->
+                </ul>
+
+                <h2>3. JavaScript:</h2>
+                <ul>
+                    <li>JavaScript is a high-level programming language primarily used for adding interactivity and
+                        dynamic behavior to web pages.</li>
+                    <li>It is supported by all modern web browsers and can be used both on the client-side and
+                        server-side (with Node.js).</li>
+                    <!-- Add more points as needed -->
+                </ul>
+
+                <h2>4. Python</h2>
+                <li>Python is a versatile high-level programming language known for its simplicity and readability.</li>
+                <li>It supports multiple programming paradigms, including procedural, object-oriented, and functional
+                    programming. Python's design philosophy emphasizes code readability with its use of significant
+                    whitespace.</li>
+                    <li>Python's straightforward syntax and extensive standard library make it an ideal choice for beginners and experienced developers alike. Python's concise syntax and built-in libraries make it an excellent choice for scripting and automating tasks, ranging from simple file operations
+                    to complex system administration tasks.</li>
+                    <li>Python is widely used for web development, with frameworks
+                    like Django and Flask offering robust solutions for building web applications.</li>
+                </ul>
+        <h2>5. RealTimeTTS (Real-Time Text-to-Speech):</h2>
+        <ul>
+            <li>Real-Time Text-to-Speech (TTS) refers to the capability of converting text into spoken audio in
+                real-time.</li>
+                <li>It allows applications to generate speech output instantly as text input is received, enabling
+                    real-time communication and interaction with users.</li>
+                <!-- Add more points as needed -->
+            </ul>
+
+            <h2>6. webkit-SpeechRecognition:</h2>
+            <ul>
+                <li>webkit-SpeechRecognition is a JavaScript API that enables speech recognition capabilities in web
+                    browsers that support it.</li>
+                    <li>It allows developers to integrate speech recognition functionality into web applications, enabling
+                        users to interact with the application using voice commands.</li>
+                        <!-- Add more points as needed -->
+            </ul>
+
+             <h2>7. DeepFace</h2>
+                <li>DeepFace is a deep learning-based facial recognition system developed by Facebook's AI research team.
+                    <li>It's designed to identify or verify human faces indigital images accurately.</li>
+                    <li>DeepFace employs advanced neural network architectures to extract facial features and matchthem against known faces in a database.</li>
+                </ul>
+            <h2>8. Gemini Pro 1.5</h2>
+            <p>
+                <li>Gemini Pro 1.5 stands as a pinnacle in natural language processing (NLP), revolutionizing user
+                    interaction paradigms.</li>
+                <li> Much like Flask empowers backend operations, HTML, CSS, and JavaScript craft intuitive frontends,
+                    and RealTimeTTS ensures seamless text-to-speech conversion, Gemini Pro 1.5 reshapes comprehension
+                    and response strategies. With its advanced NLP capabilities, it enables nuanced understanding of
+                    user queries and context, enhancing the virtual assistant's ability to provide accurate and
+                    contextually relevant responses.</li>
+                <li> Just as webkit-SpeechRecognition streamlines voice command interpretation, Gemini Pro 1.5 refines
+                    language understanding, enriching user experiences across diverse tasks and domains. Leveraging
+                    Gemini Pro 1.5 within the virtual assistant framework exemplifies a commitment to cutting-edge
+                    technology, fostering smarter, more intuitive interactions.</li>
+                </p>
+                
+                <h2>9. Flask:</h2>
+                <ul>
+                    <li>Flask is a lightweight and flexible web framework for Python.</li>
+                    <li>It provides tools, libraries, and patterns to help developers build web applications quickly and
+                        efficiently.</li>
+                        <li>Flask supports various features such as routing, request handling, template rendering, and more.
+                        </li>
+                        <!-- Add more points as needed -->
+                    </ul>
+                
+            </section>
+
+            <section id="implementation">
+                <h2>Implementation</h2>
+                <p>
+                    The project is implemented using Flask for the server-side logic and HTML, CSS, and JavaScript for
+                    the user interface. Voice recognition is performed on the server using the webkit-SpeechRecognition
+                    library. GEMINI PRO 1.5. is integrated to understand and respond to user queries.
+                </p>
+                <!-- <pre>
+            <code>
+              Include code samples and explanations here 
+            </code>
+        </pre> -->
+            </section>
+
+            <section id="user-guide">
+                <h2>User Guide</h2>
+                <p>
+                    To use the Web-Based Virtual Assistant:
+                </p>
+                <ol>
+                    <li>Open a web browser and navigate to the provided URL.</li>
+                    <li>Click the microphone button or type your command in the text input box.</li>
+                    <li>The virtual assistant will respond to your command.</li>
+                </ol>
+            </section>
+
+            <section id="conclusion">
+                <h2>Conclusion</h2>
+                <p>
+                    In essence, the amalgamation of Flask, HTML, CSS, JavaScript, RealTimeTTS, and
+                    webkit-SpeechRecognition yields a refined virtual assistant. Flask furnishes a sturdy backend
+                    structure, while HTML, CSS, and JavaScript sculpt an interactive frontend. RealTimeTTS facilitates
+                    instantaneous text-to-speech conversion, while webkit-SpeechRecognition ensures seamless voice
+                    command interpretation. Together, these components converge to form an advanced assistant, poised to
+                    elevate user efficiency and interactivity across diverse domains. Leveraging a Large Language Model
+                    (LLM) GEMINI PRO 1.5 augments the system's capability to comprehend and respond to user queries with
+                    enhanced contextual understanding and natural language generation.</p>
+            </section>
+
+            <footer>
+                <div style="background-color: #444; padding: 5px;">
+                    <p>@group8 All rights Reserved</p>
+                </div>
+            </footer>
+
+            <script>
+                function toggleSidebar() {
+                    var sidebar = document.getElementById("sidebar");
+                    sidebar.classList.toggle("active");
+                }
+            </script>
+</body>
+
+</html>
