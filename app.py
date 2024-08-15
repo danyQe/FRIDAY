@@ -300,8 +300,6 @@ def save_keys():
 
     return jsonify({'success': True})
 
-
-
 backend = Backend()
 
 @app.route('/')
