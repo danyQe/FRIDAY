@@ -324,6 +324,8 @@ def upload_file():
         return 'No selected file'
     if file and file.filename.endswith('.pdf'):
         # Save the file to a desired location
+        if not os.path.exists("documents"):
+               os.makedirs("documents")
         file.save(os.path.join('documents', file.filename))
         print(file.filename)
         message = {
