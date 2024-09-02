@@ -13,9 +13,9 @@ import datetime
 from googletrans import Translator 
 from  PIL import Image,ImageTk
 import psutil
-# from deepface import DeepFace
+from deepface import DeepFace
 from pathlib import Path
-# import screen_brightness_control as sbc 
+import screen_brightness_control as sbc 
 import cv2
 import tkinter as tk
 from selenium import webdriver
@@ -202,147 +202,147 @@ def open_application(app_name):
          return "application opened successfully."
     except Exception as e:
         return f"error occured when opening application:{e}"
-# def get_name(name=None):
-#     if not name:
-#         try:
-#             current_brightness = sbc.get_brightness()
-#             sbc.set_brightness(100)
-#         except Exception as e:
-#             print(f"Error: {e}") 
+def get_name(name=None):
+    if not name:
+        try:
+            current_brightness = sbc.get_brightness()
+            sbc.set_brightness(100)
+        except Exception as e:
+            print(f"Error: {e}") 
         
-#         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-#         camera = cv2.VideoCapture(0)
+        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        camera = cv2.VideoCapture(0)
         
-#         if not camera.isOpened():
-#             print("Error: Unable to access the camera.")
-#             return "Error: Unable to access the camera."
+        if not camera.isOpened():
+            print("Error: Unable to access the camera.")
+            return "Error: Unable to access the camera."
         
-#         cv2.namedWindow("Camera")
-#         cv2.setWindowProperty("Camera", cv2.WND_PROP_TOPMOST,1.0)
-#         start_time = time.time()
+        cv2.namedWindow("Camera")
+        cv2.setWindowProperty("Camera", cv2.WND_PROP_TOPMOST,1.0)
+        start_time = time.time()
         
-#         hold_message_time =4  # Time to display "Hold, don't move" message in seconds
-#         timeout_time = 600  # Timeout in seconds (10 minutes)
+        hold_message_time =4  # Time to display "Hold, don't move" message in seconds
+        timeout_time = 600  # Timeout in seconds (10 minutes)
         
-#         while time.time() - start_time < timeout_time:
-#             ret, image = camera.read()
+        while time.time() - start_time < timeout_time:
+            ret, image = camera.read()
             
-#             if not ret:
-#                 print("Error: Unable to capture photo.")
-#                 break
+            if not ret:
+                print("Error: Unable to capture photo.")
+                break
             
-#             cv2.imshow("Camera", image)
-#             key = cv2.waitKey(1)
+            cv2.imshow("Camera", image)
+            key = cv2.waitKey(1)
             
-#             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#             faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30,30))
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30,30))
             
-#             if len(faces) > 0:
-#                 # Draw rectangle around detected face
-#                 # Display "Hold, don't move" message for hold_message_time seconds
-#                 for (x, y, w, h) in faces:
-#                     cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)  
-#                 cv2.imshow("Camera", image)
+            if len(faces) > 0:
+                # Draw rectangle around detected face
+                # Display "Hold, don't move" message for hold_message_time seconds
+                for (x, y, w, h) in faces:
+                    cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)  
+                cv2.imshow("Camera", image)
             
-#                 # Wait for hold_message_time seconds before capturing photo
-#                 if time.time() - start_time > hold_message_time:
-#                     cv2.imwrite("cp.jpg", image  )
-#                     time.sleep(3)  # Pause execution for 3 seconds
+                # Wait for hold_message_time seconds before capturing photo
+                if time.time() - start_time > hold_message_time:
+                    cv2.imwrite("cp.jpg", image  )
+                    time.sleep(3)  # Pause execution for 3 seconds
                     
-#                     # Release camera and close window after image saved successfully
-#                     camera.release()
-#                     cv2.destroyAllWindows()
+                    # Release camera and close window after image saved successfully
+                    camera.release()
+                    cv2.destroyAllWindows()
                     
-#                     break  # Exit the loop after image saved successfully
+                    break  # Exit the loop after image saved successfully
 
-#             else:
-#                 # If no face detected, continue displaying camera feed
-#                 continue
+            else:
+                # If no face detected, continue displaying camera feed
+                continue
         
-#         try:
-#             sbc.set_brightness(current_brightness[0])
-#         except Exception as e:
-#             print(f"Error: {e}")
+        try:
+            sbc.set_brightness(current_brightness[0])
+        except Exception as e:
+            print(f"Error: {e}")
         
-#         file_path = Path("photos/representations_vgg_face.pkl")
+        file_path = Path("photos/representations_vgg_face.pkl")
         
-#         try:
-#             file_path.unlink()
-#             print(f"{file_path} has been deleted successfully.")
-#         except OSError as e:
-#             print(f"Error: {file_path}: {e.strerror}")
+        try:
+            file_path.unlink()
+            print(f"{file_path} has been deleted successfully.")
+        except OSError as e:
+            print(f"Error: {file_path}: {e.strerror}")
         
-#         if len(faces) == 0:
-#             print("Error: No face detected within the time limit.")
-#             return "Error: No face detected within the time limit."
+        if len(faces) == 0:
+            print("Error: No face detected within the time limit.")
+            return "Error: No face detected within the time limit."
         
-#         if not os.path.exists("photos"):
-#             os.makedirs("photos")
+        if not os.path.exists("photos"):
+            os.makedirs("photos")
         
-#         photo_files = [f for f in os.listdir("photos") if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+        photo_files = [f for f in os.listdir("photos") if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
         
-#         if not photo_files:
-#             print("Error: Unable to recognize the image.")
-#             return "Error: Unable to recognize the image."
+        if not photo_files:
+            print("Error: Unable to recognize the image.")
+            return "Error: Unable to recognize the image."
         
-#         try:
-#             result = DeepFace.find(img_path='./cp.jpg', db_path="photos", enforce_detection=False, threshold=0.3)
-#             analysis = DeepFace.analyze(img_path='./cp.jpg', actions=['emotion', 'age'], enforce_detection=False)
-#         except Exception as e:
-#             print(f"Error: {e}")
-#             return f"Error: {e}"
+        try:
+            result = DeepFace.find(img_path='./cp.jpg', db_path="photos", enforce_detection=False, threshold=0.3)
+            analysis = DeepFace.analyze(img_path='./cp.jpg', actions=['emotion', 'age'], enforce_detection=False)
+        except Exception as e:
+            print(f"Error: {e}")
+            return f"Error: {e}"
         
-#         detected_age = analysis[0]['age'] - 4
-#         detected_emotion = analysis[0]['dominant_emotion']
-#         identity = str(result[0]['identity'])
+        detected_age = analysis[0]['age'] - 4
+        detected_emotion = analysis[0]['dominant_emotion']
+        identity = str(result[0]['identity'])
         
-#         print(f"Identity: {identity}")
+        print(f"Identity: {identity}")
         
-#         if '_' in identity:
-#             recognised_name = os.path.basename(identity).split('_')[0]
-#             print(f"Recognised Name: {recognised_name}")
-#         else:
-#             recognised_name = os.path.basename(identity).split('.')[0] # Extract the name without extension
-#             print(f"Recognised Name: {recognised_name}")
+        if '_' in identity:
+            recognised_name = os.path.basename(identity).split('_')[0]
+            print(f"Recognised Name: {recognised_name}")
+        else:
+            recognised_name = os.path.basename(identity).split('.')[0] # Extract the name without extension
+            print(f"Recognised Name: {recognised_name}")
         
-#         if len(result) > 0 and not result[0].empty:
-#             user_name = os.path.basename(identity).split('.')[0]
-#             print(f"Username: {user_name}")
+        if len(result) > 0 and not result[0].empty:
+            user_name = os.path.basename(identity).split('.')[0]
+            print(f"Username: {user_name}")
             
-#             image_name = f"{recognised_name}_{len(os.listdir('photos')) + 1}.jpg"
-#             cv2.imwrite(os.path.join("photos", image_name), image)
-#             print(f"Recognised Name: {recognised_name}, Emotion: {detected_emotion}, Age: {detected_age}")
+            image_name = f"{recognised_name}_{len(os.listdir('photos')) + 1}.jpg"
+            cv2.imwrite(os.path.join("photos", image_name), image)
+            print(f"Recognised Name: {recognised_name}, Emotion: {detected_emotion}, Age: {detected_age}")
             
-#             if os.path.exists("cp.jpg"):
-#                 os.remove("cp.jpg")
-#                 print("cp.jpg has been deleted successfully.")
+            if os.path.exists("cp.jpg"):
+                os.remove("cp.jpg")
+                print("cp.jpg has been deleted successfully.")
             
-#             return f"Recognised Name: {recognised_name}, Emotion: {detected_emotion}, Age: {detected_age}"
-#         else:
-#             print(f"Error: Unable to recognize the face.please provide your name detected emotion:{detected_emotion},detected age :{detected_age}")
-#             return f"Error: Unable to recognize the face.please provide your name detected emotion:{detected_emotion},detected age :{detected_age}"
+            return f"Recognised Name: {recognised_name}, Emotion: {detected_emotion}, Age: {detected_age}"
+        else:
+            print(f"Error: Unable to recognize the face.please provide your name detected emotion:{detected_emotion},detected age :{detected_age}")
+            return f"Error: Unable to recognize the face.please provide your name detected emotion:{detected_emotion},detected age :{detected_age}"
         
-#     elif name:
-#         try:
-#             analysis = DeepFace.analyze(img_path='cp.jpg', actions=['emotion', 'age'], enforce_detection=False)
-#         except Exception as e:
-#             print(f"Error: {e}")
-#             return f"Error: {e}"
+    elif name:
+        try:
+            analysis = DeepFace.analyze(img_path='cp.jpg', actions=['emotion', 'age'], enforce_detection=False)
+        except Exception as e:
+            print(f"Error: {e}")
+            return f"Error: {e}"
         
-#         detected_emotion = analysis[0]['dominant_emotion']
-#         detected_age = analysis[0]['age']
+        detected_emotion = analysis[0]['dominant_emotion']
+        detected_age = analysis[0]['age']
         
-#         user_folder = 'photos'
-#         image_name = f"{name}_{len(os.listdir(user_folder)) + 1}.jpg"
+        user_folder = 'photos'
+        image_name = f"{name}_{len(os.listdir(user_folder)) + 1}.jpg"
         
-#         cv2.imwrite(os.path.join(user_folder, image_name), cv2.imread('cp.jpg'))
-#         print(f"Recognised Name: {name} saved successfully, Emotion: {detected_emotion}, Age: {detected_age}")
+        cv2.imwrite(os.path.join(user_folder, image_name), cv2.imread('cp.jpg'))
+        print(f"Recognised Name: {name} saved successfully, Emotion: {detected_emotion}, Age: {detected_age}")
         
-#         if os.path.exists("cp.jpg"):
-#             os.remove("cp.jpg")
-#             print("cp.jpg has been deleted successfully.")
+        if os.path.exists("cp.jpg"):
+            os.remove("cp.jpg")
+            print("cp.jpg has been deleted successfully.")
         
-#         return f"Name: {name} saved successfully. Emotion: {detected_emotion}, Age: {detected_age}"
+        return f"Name: {name} saved successfully. Emotion: {detected_emotion}, Age: {detected_age}"
 def get_date_and_time():
     try: 
         now = datetime.datetime.now()
