@@ -297,7 +297,7 @@ def save_keys():
     with open('.env', 'w') as f:
         f.write(f"""GOOGLE_API_KEY="{google_api_key}"\n""")
         f.write(f"""TF_ENABLE_ONEDNN_OPTS=0\n""")
-
+    load_dotenv()
     return jsonify({'success': True})
 
 backend = Backend()
