@@ -41,10 +41,12 @@ Need a quick summary of a long PDF? Friday can summarize documents for you withi
 ## 🌟 **Screenshots**  
 Here's a sneak peek of the UI:
 
-> ![UI Preview]
-> Home Screen:(/screenshots/homescreen.png)  
-> Input Screen:(/screenshots/input_screen.png)
+## UI Preview
+![Home Screen](/screenshots/homescreen.png)  
+*The main interface of Friday, showcasing the home screen.*
 
+![Input Screen](/screenshots/input_screen.png)  
+*The input screen where users can interact with Friday via text or voice commands.*
 ---
 
 ## 🚀 **Getting Started**  
