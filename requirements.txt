@@ -1,8 +1,6 @@
 requests
-speech-recognition
+SpeechRecognition
 pypi-json
-os
-pycopy-webbrowser
 python-dotenv
 pyttsx3
 Flask
