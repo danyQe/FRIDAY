@@ -20,7 +20,7 @@ import cv2
 import tkinter as tk
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options as EdgeOptions
-# from selenium.webdriver.common.by import By
+#from selenium.webdriver.common.by import By
 import requests
 from dotenv import load_dotenv
 import os
@@ -163,9 +163,11 @@ def web_scrape(url):
     # Launch Microsoft Edge with Selenium
     # driver = webdriver.Edge()
     try:
-        #  options = EdgeOptions()
-        #  options.add_experimental_option('excludeSwitches', ['enable-logging'])
-         driver = webdriver.Edge()
+         from selenium import webdriver
+         from webdriver_manager.microsoft import EdgeChromiumDriverManager
+         from selenium.webdriver.edge.service import Service
+
+         driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
      
          # Navigate to the specified URL
          driver.get(url)
