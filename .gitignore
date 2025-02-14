@@ -8,5 +8,5 @@ photos/
 documents/
 agents/
 .vscode/
-__pycache__
+__pycache__/
 test.py
