@@ -9,7 +9,7 @@ from utils.rate_limiter import RateLimiter
 from utils.gemini_client import GeminiClient
 from utils.file_service import FileService
 
-
+gemini_client=None
 app = Flask(__name__, static_folder='static', template_folder='templates')
 app.config['SECRET_KEY'] = 'group2'  # Change this to a secure secret key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'  # Using SQLite for simplicity
@@ -36,15 +36,15 @@ def load_user(user_id):
     return db.session.get(int(user_id))
 
 
-config = Config()
-rate_limiter = RateLimiter(config.MAX_RPM, config.MAX_TPM, config.MAX_RPD)
-gemini_client = GeminiClient(config.GOOGLE_API_KEY, rate_limiter)
-file_service = FileService(config.UPLOAD_FOLDER, config.ALLOWED_EXTENSIONS)
-
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+config = Config()
+rate_limiter = RateLimiter(config.MAX_RPM, config.MAX_TPM, config.MAX_RPD)
+file_service = FileService(config.UPLOAD_FOLDER, config.ALLOWED_EXTENSIONS)
+
 
 @app.route('/')
 def home():
@@ -60,7 +60,6 @@ def send_message():
             return jsonify({"error": "Message is required"}), 400
             
         # Get recent conversation history
-        
         # Send message to Gemini
         response = gemini_client.send_message(message,current_user.name)
         
@@ -136,6 +135,8 @@ def login():
 @app.route("/input")
 @login_required
 def input():
+    global gemini_client
+    gemini_client = GeminiClient(config.GOOGLE_API_KEY, rate_limiter,user_name=current_user.name)
     return render_template("input.html",user_name=current_user.name)
 @app.route('/logout')
 @login_required

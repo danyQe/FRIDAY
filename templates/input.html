@@ -438,6 +438,7 @@
             opacity: 1;
             visibility: visible;
             bottom: calc(100% + 10px);
+            
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -570,7 +571,7 @@
         <div class="details">
             <h1>R.O.L.E.X</h1>
             <br>
-            <h3>Hello {{user_name}} !!!</h3>
+            <!-- <h3>Hello {{user_name}} !!!</h3> -->
         </div>
 
         <div class="voice-controls">
@@ -588,7 +589,7 @@
 
         <div class="chat-container">
             <div id="chatbox">
-                <p class="botText">Hello! I'm ROLEX. How can I assist you today?</p>
+                <!-- <p class="botText">Hello! I'm ROLEX. How can I assist you today?</p> -->
             </div>
         </div>
 
@@ -773,7 +774,7 @@
 }
 
 // New function to handle Markdown-like formatting
-function appendMessageWithMarkdown(sender, message) {
+            function appendMessageWithMarkdown(sender, message) {
     const messageElement = document.createElement('div');
     messageElement.className = sender === 'user' ? 'userText' : 'botText';
     
@@ -852,7 +853,11 @@ function appendMessageWithMarkdown(sender, message) {
                 }
                 document.body.classList.remove('processing');
             }
-
+            function sendsystemMessage(){
+                const message="hi";
+                sendMessage(message);
+            }
+            sendsystemMessage();
             async function handleFileUpload() {
                 document.body.classList.add('processing');
                 const file = fileInput.files[0];

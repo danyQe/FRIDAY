@@ -8,10 +8,10 @@ from utils.prompt import prompts
 from utils.memory_manager import MemoryManager
 
 class GeminiClient:
-    def __init__(self, api_key: str, rate_limiter: RateLimiter):
+    def __init__(self, api_key: str, rate_limiter: RateLimiter,user_name:str=""):
         self.client = genai.Client(api_key=api_key)
         self.rate_limiter = rate_limiter
-        self.config=types.GenerateContentConfig(tools=functions,system_instruction=prompts["friday"])
+        self.config=types.GenerateContentConfig(tools=functions,system_instruction=prompts["friday"]+"The current user name is:"+user_name)
         self.memory=MemoryManager()
         self.chat = self.client.chats.create(model="gemini-1.5-flash",config=self.config)
         

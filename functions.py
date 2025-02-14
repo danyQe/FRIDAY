@@ -2,26 +2,19 @@ from typing import Optional,Union
 import os
 import pyautogui
 import time
-import cv2
-import json
-import psutil
 import subprocess
 import PyPDF2
 from deep_translator import GoogleTranslator
 import datetime
 from youtube_transcript_api import YouTubeTranscriptApi
 from bs4 import BeautifulSoup
-from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import pywhatkit
 from google import genai
-from google.genai import  types
-import PIL.Image
 from utils.helpers import fix_content,summarize_content,speak,get_voice_input
 from utils.config import Config
-from utils.prompt import prompts
 from pydantic import BaseModel
 
 #the user functions called by gemini
@@ -184,7 +177,7 @@ def execute_python_code(python_code: str) -> dict[str, str]:
     except Exception as e:
         return {"status": "error", "results": str(e)}
 
-def play_music(song_name: str) -> dict[str, str]:
+def play_music(song_name: str) -> dict[str, str,str]:
     """Plays a song on Spotify.
     
     Args:
@@ -202,37 +195,15 @@ def play_music(song_name: str) -> dict[str, str]:
         pyautogui.write('Spotify')
         time.sleep(2)
         pyautogui.press('enter')
-    
-        program_name = "Spotify.exe"
-        timeout_duration = 150  # Timeout duration in seconds
-        start_time = time.time()
-    
-        # Wait until Spotify is open or timeout occurs
-        while time.time() < start_time + timeout_duration:
-            for process in psutil.process_iter():
-                try:
-                    if process.name() == program_name:
-                        print("Spotify is open!")
-                        break
-                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                    pass
-            else:
-                time.sleep(1)
-                continue
-            break
-        else:
-            print("Timed out!")
-            return False
-    
         # Wait for Spotify to load
-        time.sleep(20)
+        time.sleep(10)
     
         # Focus on the Spotify window
         spotify_window = pyautogui.getWindowsWithTitle("Spotify")[0]
         spotify_window.maximize()
     
         # Focus on the search bar
-        pyautogui.hotkey('ctrl', 'l')
+        pyautogui.hotkey('ctrl', 'k')
         time.sleep(3)
     
         # Type the song name in the search bar and press Enter
@@ -241,11 +212,6 @@ def play_music(song_name: str) -> dict[str, str]:
         pyautogui.press('enter')
         time.sleep(1)
         # Select the first search result (assuming it's the desired song)
-        for _ in range(3):  # Press Tab 6 times to navigate to the first search result
-            pyautogui.press('tab')
-            time.sleep(0.5)
-        pyautogui.press('enter')
-    
         # Check if the song started playing
         time.sleep(5)  # Wait for the song to start playing
         return {
@@ -255,6 +221,7 @@ def play_music(song_name: str) -> dict[str, str]:
         }
     except Exception as e:
           return {
+            "song":song_name,
             "status": "error",
             "error": str(e)
         }
@@ -422,12 +389,9 @@ def summarise_the_youtube_video(video_url: str) -> dict[str, str]:
     except Exception as e:
         return {"status": "error", "message": f"Error occurred while transcribing: {e}"}
 
-import time
-import pyautogui
-import subprocess
-from typing import Dict
 
-def call_on_whatsapp(receiver: str) -> Dict[str, str]:
+
+def call_on_whatsapp(receiver: str) -> dict[str, str]:
     """
     Initiates a voice call on WhatsApp with the given receiver name.
 
@@ -466,7 +430,7 @@ def call_on_whatsapp(receiver: str) -> Dict[str, str]:
         speak("Sorry, I encountered an error while making the call.")
         return {"status": "error", "message": f"Error occurred: {e}"}
 
-def videocall_on_whatsapp(receiver: str) -> Dict[str, str]:
+def videocall_on_whatsapp(receiver: str) -> dict[str, str]:
     """
     Initiates a video call on WhatsApp with the given receiver name.
 
