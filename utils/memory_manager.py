@@ -45,8 +45,8 @@ class MemoryManager:
                 "role":"assistant","content": response
             }],user_id=user_name,agent_id="rolex")
         
-    def get_recent_conversations(self, user_message:str,limit: int = 10) -> List[dict]:
+    def get_recent_conversations(self, user_message:str,user_id:str,limit: int = 10) -> List[dict]:
         """Get recent conversations from memory"""
-        relevant_memories=self.memory.search(query=user_message,user_id="default_user",limit=3)
+        relevant_memories=self.memory.search(query=user_message,user_id=user_id,limit=3)
         memory_str="\n".join(f"-{entry['memory']}" for entry in relevant_memories)
         return memory_str

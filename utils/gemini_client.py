@@ -23,7 +23,7 @@ class GeminiClient:
             
         try:
             print("chat:",self.chat._curated_history)
-            memories=self.memory.get_recent_conversations(message)
+            memories=self.memory.get_recent_conversations(user_message=message,user_id=user_name)
             print("previous_memories:",memories)
             response = self.chat.send_message(f"{message}\nrelevant memories :{str(memories)}")
             # print("response:",response)

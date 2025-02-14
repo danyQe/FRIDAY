@@ -422,6 +422,88 @@ def summarise_the_youtube_video(video_url: str) -> dict[str, str]:
     except Exception as e:
         return {"status": "error", "message": f"Error occurred while transcribing: {e}"}
 
+import time
+import pyautogui
+import subprocess
+from typing import Dict
+
+def call_on_whatsapp(receiver: str) -> Dict[str, str]:
+    """
+    Initiates a voice call on WhatsApp with the given receiver name.
+
+    Args:
+        receiver (str): Name of the WhatsApp contact to call.
+
+    Returns:
+        Dict[str, str]: A dictionary containing status and message.
+    """
+    try:
+        pyautogui.hotkey('win')
+        time.sleep(3)
+        pyautogui.write('whatsapp')
+        time.sleep(7)
+        pyautogui.press('enter')
+        # subprocess.Popen(["C:\\Users\\YourUsername\\AppData\\Local\\WhatsApp\\WhatsApp.exe"])  # Update path if needed
+        time.sleep(5)
+
+        pyautogui.write(receiver, interval=0.1)
+        pyautogui.press("enter")
+        time.sleep(2)
+
+        # Navigating to the call button
+        for _ in range(11):
+            pyautogui.press("tab")
+
+        pyautogui.press("enter")
+        time.sleep(2)
+
+        return {"status": "success", "message": f"Voice call initiated to {receiver} on WhatsApp."}
+
+    except Exception as e:
+        with open("error.txt", "a", encoding="utf-8") as f:
+            f.write(f"Error calling {receiver}: {e}\n")
+
+        speak("Sorry, I encountered an error while making the call.")
+        return {"status": "error", "message": f"Error occurred: {e}"}
+
+def videocall_on_whatsapp(receiver: str) -> Dict[str, str]:
+    """
+    Initiates a video call on WhatsApp with the given receiver name.
+
+    Args:
+        receiver (str): Name of the WhatsApp contact to call.
+
+    Returns:
+        Dict[str, str]: A dictionary containing status and message.
+    """
+    try:
+        pyautogui.hotkey('win')
+        time.sleep(3)
+        pyautogui.write('whatsapp')
+        time.sleep(7)
+        pyautogui.press('enter')
+        # subprocess.Popen(["C:\\Users\\YourUsername\\AppData\\Local\\WhatsApp\\WhatsApp.exe"])  # Update path if needed
+        time.sleep(5)
+
+        pyautogui.write(receiver, interval=0.1)
+        pyautogui.press("enter")
+        time.sleep(2)
+
+        # Navigating to the video call button
+        for _ in range(10):
+            pyautogui.press("tab")
+
+        pyautogui.press("enter")
+        time.sleep(2)
+
+        return {"status": "success", "message": f"Video call initiated to {receiver} on WhatsApp."}
+
+    except Exception as e:
+        with open("error.txt", "a", encoding="utf-8") as f:
+            f.write(f"Error video calling {receiver}: {e}\n")
+
+        speak("Sorry, I encountered an error while making the video call.")
+        return {"status": "error", "message": f"Error occurred: {e}"}
 
 class Description(BaseModel):
     current_window_description:str="clearly describes what the windows is actually showing "
@@ -537,6 +619,8 @@ functions=[
         read_program_file,
         play_videos_on_youtube,
         summarise_the_youtube_video,
+        call_on_whatsapp,
+        videocall_on_whatsapp,
         shutdown,
         sleep,
         restart
