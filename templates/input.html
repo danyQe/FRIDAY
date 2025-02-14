@@ -1,529 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input</title>
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}"> -->
-    <!-- <script src="{{ url_for('static', filename='script.js')}}"></script> -->
-    <style>
-          /* body {
-            background-image: url("{{ url_for('static', filename='5.jpg')}}");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-        } */
-        body, html {
-            width: 100%;
-            margin: 0;
-        }
-
-        body {
-            background-image: url("{{ url_for('static', filename='5.jpg')}}");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            background-color: black;
-        }
-
-        #microphone-container {
-          
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: nowrap;
-            flex-direction: column-reverse;
-            align-content: space-around;
-        }
-        #microphone-container-full
-        {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 40vh;
-            width: 100vw;
-        }
-
-        .microphone {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: green url("{{ url_for('static', filename='microphone.png')}}") center/cover;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .microphone:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        #voice-wave-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-            width: 200px;
-            /* height: 70px; */
-        }
-
-        textarea {
-            width: 80%;
-            height: 25px;
-            padding: 9px;
-            border: 2px solid #ccc;
-            border-radius: 15px;
-            font-size: 16px;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        #text-button {
-            height: 40px;
-            background-color: rgb(49, 246, 15);
-            padding: 10px;
-            text-align: center;
-            font-size: 18px;
-            border-radius: 12px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-
-        #text-button:hover {
-            background-color: aquamarine;
-        }
-
-        #bars {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            display: none;
-            height:200px;
-            width:70px;
-            width:auto;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            height: 50px;
-            justify-content: space-around;
-            background-color: black;
-            padding: 5px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            cursor: pointer;
-            font-size: 25px;
-        }
-
-        nav a:hover {
-            color: #3c3b3bdb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        #close-button {
-            display: none;
-            height: 50px;
-            width: 50px;
-            background-color: red;
-            text-align: center;
-            text-decoration: double;
-            border-radius: 50%;
-            font-size: 50px;
-            color: white;
-            cursor: pointer;
-            margin-top: 40px;
-            font-weight: bolder;
-        }
-
-        .chat-box {
-            background-color: #fbfbfb;
-            color: black;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 7px;
-            width:80%;
-            max-height: 60%;
-            overflow-y:auto;
-        }
-
-        .bar {
-            background: #fbfbfb;
-            bottom: 1px;
-            height: 3px;
-            width: 10px;
-            margin: 0px 4px;
-            border-radius: 5px;
-            animation: sound 0ms -600ms linear infinite alternate;
-        }
-
-        @keyframes sound {
-            0% {
-                opacity: .35;
-                height: 3px;
-            }
-            100% {
-                opacity: 1;
-                height: 70px;
-            }
-        }
-
-        .bar:nth-child(1) { animation-duration: 474ms; }
-        .bar:nth-child(2) { animation-duration: 433ms; }
-        .bar:nth-child(3) { animation-duration: 407ms; }
-        .bar:nth-child(4) { animation-duration: 458ms; }
-        .bar:nth-child(5) { animation-duration: 400ms; }
-        .bar:nth-child(6) { animation-duration: 427ms; }
-        .bar:nth-child(7) { animation-duration: 441ms; }
-        .bar:nth-child(8) { animation-duration: 419ms; }
-        .bar:nth-child(9) { animation-duration: 487ms; }
-        .bar:nth-child(10) { animation-duration: 442ms; }
-
-       
-        #restart-button{
-            background-color:black;
-            color: white;
-            cursor:pointer;
-            width:70px;
-            border-radius: 10px;
-            transition:transform 0.2s,box-shadow 0.2s;
-        }
-        #display-message{
-            display: flex;
-            justify-content: center;
-        }
-        #buttons{
-            display: flex;
-            justify-content: flex-end;
-        }
-        #settings{
-            background-color: #ccccccb5;
-            color:black;
-            height:10px;
-
-        }
-        #input-box-container{
-            display: flex;
-            /* align-items: flex-start; */
-            justify-content:center;
-            position: fixed;
-            width:100%;
-            bottom: 10px;
-        }
-        .chat-box-container{
-            display: flex;
-            justify-content: center;
-        }
-        .userText {
-            color: blue;
-        }
-        .botText {
-            color: green;
-        }
-        .codeText {
-            white-space: pre-wrap; /* Preserve whitespace and wrap lines */
-            font-family: monospace; /* Use monospace font for code */
-            background-color: #f0f0f0; /* Light gray background for code block */
-            padding: 10px; /* Add padding for better readability */
-            border-radius: 5px; /* Add rounded corners */
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="http://localhost:5000/">Home</a>
-        <a href="http://localhost:5000/documentation">Documentation</a>
-        <a href="http://localhost:5000/about">About us</a>
-        <a href="http://localhost:5000/contact">Contact us</a>
-        <a href="http://localhost:5000/resources">Resources</a>
-    </nav><br>
-   <div id="buttons">
-        <button id="restart-button">Restart</button>
-     </div> 
-    <div id="display-message"><h2>Ask me Something!!</h2></div>
-    <div id="microphone-container-full">
-    <div id="microphone-container">
-        <div class="close-button" id="close-button">&times;</div><br>
-        <div class="microphone" id="microphone"></div><br>
-        <div id="voice-wave-container">
-            <div id="bars">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>R.O.L.E.X</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='input.css') }}">
+        <script src="{{ url_for('static', filename='input.js') }}"></script>
+        <script src="https://kit.fontawesome.com/618758b97a.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <Section class="Navigation-bar">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='Rolex.png') }}" alt="">
+                </div>
+                <ul>
+                    
+                    <li><a href="index"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="about"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li class="logbtn"><a href="logout"><i class="fa-solid fa-user"></i>  Log out</a></li>
+                    
+                </ul>
             </div>
-        </div>
-    </div>
-     </div>
-    <div class="chat-box-container">
-        <div class="chat-box" id="chatbox">
-            <p class="botText">
-            </p>
-        </div>
-    </div>
-    </div>
-    <br>
-    <div id="input-box-container">
-        <textarea id="text-box" placeholder="Enter a command or ask something! 😀"></textarea>
-        <button type="button" id="text-button">Submit</button>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const voicewave = document.getElementById("bars");
-    const closeButton = document.getElementById('close-button');
-    const microphone = document.getElementById('microphone');
-    const textBox = document.getElementById('text-box');
-    const textButton = document.getElementById('text-button');
-    let isListening = false;
-    // const chatbox = document.getElementById('chatbox');
-    textButton.disabled = true;
-textButton.style.backgroundColor = 'gray';
+        </Section>
 
-function voiceInput() {
-    const recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
+        <section class="header">
 
-    let wakeWord = 'wakeup';
-    let sleepWord = 'sleep';
-    let inactiveTimeout = 600000; // 10 minutes in milliseconds
-    let lastActiveTime = Date.now();
-    let initialActive = false;
-    let active = false;
-
-    recognition.onresult = function(event) {
-        const text = event.results[0][0].transcript.toLowerCase();
-        
-        if (!initialActive) {
-            initialActive = true;
-            lastActiveTime = Date.now();
-            active = true;
-            console.log("You said: " + text);
-            return text;
-        }
-        
-        let currentTime = Date.now();
-
-        // Check if inactive for 10 minutes
-        if (currentTime - lastActiveTime >= inactiveTimeout) {
-            console.log("Inactive for 10 minutes. Sleeping...");
-            active = false;
-        }
-
-        if (text.includes(wakeWord)) {
-            console.log("Waking up...");
-            lastActiveTime = Date.now();
-            active = true;
-            return text;
-        }
-
-        if (text.includes(sleepWord)) {
-            console.log("Sleeping...");
-            active = false;
-        }
-
-        console.log("You said:", text);
-        lastActiveTime = Date.now();
-    };
-
-    recognition.onerror = function(event) {
-        console.error("Error recognizing audio:", event.error);
-    };
-
-    // Start listening for speech input
-    recognition.start();
-
-    // To stop listening, use:
-    // recognition.stop();
-}
-
-function stopListening() {
-        const recognition = new webkitSpeechRecognition();                                  // Stop Web Speech API recognition
-        console.log('Stop listening...');
-        recognition.stop();
-        closeButton.style.display = 'none'; // Hide the close button
-        microphone.style.display = 'block'; // Show the microphone button
-        voicewave.style.display = 'none';
-         // Hide the voice wave container
-    }
-    function startListening() {
-        isListening = true;
-        console.log('Start listening...');
-        textButton.disabled = true; // Disable the text button while listening
-        microphone.style.display = 'none'; // Hide the microphone button
-        voicewave.style.display = 'flex'; // Show the voice wave container
-        closeButton.style.display = 'block'; // Show the close button
-        transcript=voiceInput();    
-        sendMessage(transcript);
-    }
-    function sendMessage(message)
-    {
-        fetch('http://localhost:5000/send_message',{
-            method:'POST',
-            headers:{
+            <!-- <video width="400" autoplay>
+                <source src="/img/backgroundvideo.mp4" type="video/mp4">
                 
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({message:message})
-        })
-        .then(response=>
-        {
-                if(!response.ok)
-                {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-        .then(data=>{
-            if(data.message)
-            {
-                if(data.code)
-                {
-                    appendCode(data.code);
-                }
-                else{
-                    console.log('Response from backend',data.message)
-                    appendMessage('bot',data.message);
-                }
-            }
-            
-            else{
-                console.error('Error:Response from backend is missing message');
-            }
-        })
-        .catch(error=>{
-            console.error('Error:',error);
-        });
-    }
-    
-    function fetchSystemMessageFromBackend() {
-        fetch('/send_system_message',
-        {
-            method:'POST'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const systemMessage = data.message;
-            console.log('Received system message from backend:', systemMessage);
-            // Process the received system message as needed
-            appendMessage('Friday:',systemMessage);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle error conditions
-        });
-    }
-    fetchSystemMessageFromBackend();
-    function appendCode(code) {
-        const chatbox = document.getElementById('chatbox');
-        const codeElement = document.createElement('code');
-        codeElement.textContent = code;
-        const preElement = document.createElement('pre');
-        preElement.appendChild(codeElement);
-        chatbox.appendChild(preElement);
-    }
-    function adjustSizes() {
-                microphone.style.width = '100px';
-                microphone.style.height = '100px';
-                closeButton.style.fontSize = '20px';
-                voicewave.style.height = '50px';
-            }
-    function appendMessage(sender,message) {
-        const chatbox = document.getElementById('chatbox');
-        const messageElement = document.createElement('p');
-        messageElement.textContent = sender+":"+message;
-        if (sender === 'user') {
-            messageElement.className = 'userText';
-        } else if (sender === 'Friday') {
-            messageElement.className = 'botText';
-        }
-        chatbox.appendChild(messageElement);
-    }
-    // Add an input event listener to the text box
-    textBox.addEventListener('input', function() {
-    // Check if the text box is empty
-    if (textBox.value.trim() === '') {
-        // If it's empty, disable the text button and change its background color to gray
-        textButton.disabled = true;
-        textButton.style.backgroundColor = 'gray';
-    } else {
-        // If there is text, enable the text button and set its background color to green
-        textButton.disabled = false;
-        textButton.style.backgroundColor = 'rgb(49, 246, 15)'; // Green color
-    }
-});
-textBox.addEventListener('keypress',function(event)
-{
-    if(event.key==='Enter')
-    {
-        const message = textBox.value.trim();
-        appendMessage('user',message);
-        sendMessage(message);
-        function adjustSizes() {
-                microphone.style.width = '100px';
-                microphone.style.height = '100px';
-                closeButton.style.fontSize = '20px';
-                voicewave.style.height = '50px';
-            }
-        textBox.value = '';
-    }
-})
-textButton.addEventListener('click', function() {
-    const message = textBox.value.trim();
-    if (message !== '') {
-        // Send text message to backend
-        sendMessage(message,isVoice=false);
-        textBox.value = '';
-    }
-});
-microphone.addEventListener('click', function() {
-    console.log('Microphone clicked');
-    startListening(); // Start listening to the microphone
-});
+                
+              </video> -->
+              <video id="background-video" src="{{ url_for('static', filename='siri (online-video-cutter.com).mp4') }}" autoplay loop type="video/mp4" muted>
+                
+                
+            </video>
+            <div class="details">
+            <h1>R.O.L.E.X</h1>
+            <br>
+            <h3>Hello {{user_name}} !!!</h3>
+            </div>
 
-closeButton.addEventListener('click', function() {
-    console.log('Close button clicked');
-    if (isListening) {
-        stopListening(); // Stop listening to the microphone
-    }
-});
-document.getElementById('restart-button').addEventListener('click', function() {
-    fetch('/restart_backend', {
-        method: 'POST'
-    })
-    .then(response => 
-    {
-        if(response.ok)
-        {
-            window.close();
-        }
-        else{
-            console.error('Failed to restart backend.');
-            alert('Failed to restart backend.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while restarting the backend.');
-        });
-    });
-});
-    </script>
-</body>
+            <div class="voice-controls">
+                <div class="voice-select-container">
+                    <select id="voice-select"></select>
+                </div>
+                <div class="speech-toggle-container">
+                    <span>ROLEX Speech:</span>
+                    <label class="switch">
+                        <input type="checkbox" id="speech-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="inputfooter">
+                <p class="upload-btn-wrapper">
+                    <button class="subbtn"><i class="fa-solid fa-file"></i></i>&nbsp;&nbsp;</i>Upload a file</button>
+                    <input type="file" name="myfile" />
+                </p>
+
+                <p class="searchbar">
+                    <input type="search" name="" id="" placeholder="Enter the command....">                   
+                </p>
+                <p>
+                    <i id="micButton" class="fa-solid fa-microphone"></i>
+                </p>
+                <div id="voice-wave" class="voice-wave">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <button id="stop-button">
+                    <i class="fa-solid fa-stop"></i>
+                </button>
+            </div>
+
+        </section>
+        
+    </body>
 </html>

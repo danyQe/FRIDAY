@@ -4,16 +4,16 @@ import os
 import webbrowser
 from threading import Timer,Thread,Event,Lock
 from dotenv import load_dotenv
-from prompt import prompts
+from utils.prompt import prompts
 from flask import Flask, render_template, request, jsonify,send_from_directory
 import_lock=Lock()
-def import_gemini_functions():
-    global gemini_functions
+def import_functions():
+    global functions
     with import_lock:
          print("importing functions and neccessary libraries.........\n")
-         import gemini_functions
+         import functions
          print("the functions successfully imported\n")
-import_thread=Thread(target=import_gemini_functions)
+import_thread=Thread(target=import_functions)
 import_thread.start()
 print("starting the voice assistant......\n")
 import_thread.join()
@@ -44,57 +44,6 @@ class Backend:
             return total_tokens
         except Exception as e:
              print(f"unable to count tokens reason :{e}")
-    def summarize_content(self,messages):
-        try:
-            example_function="""{
-    "role": "function",
-    "parts": [
-        {
-            "functionResponse": {
-                "name": "write_to_file",
-                "response": {
-                    "name": "write_to_file",
-                    "content": {
-                        "status": "Successfully written to file history.txt"
-                    }
-                }
-            }
-        }
-    ]
-    }"""
-            example_model="""{
-    "role": "model",
-    "parts": [
-        {
-            "functionCall": {
-                "name": "get_name",
-                "args": {}
-            }
-        }
-    ]
-    }"""
-            prompt=f"remove the function calls(ex:{example_model}) and function responses(all role with function example:{example_function}) ,also remove the unneccessary content from this messages like repeated contents and user don't wanted to read again and generate the response in the same json format the messages is:{messages}"
-            message={
-            "role":"user",
-           "parts": [{"text": prompt}]
-        }
-            data={
-            "contents":[message],
-            "generationConfig": {
-            "temperature": 0
-            }
-        }
-            response= requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" +self.api_key, json=data,headers=self.headers)
-            if(response.status_code==200):
-               response=response.json()
-               message = response['candidates'][0]['content']['parts'][0]['text']
-               return message
-            elif(response.status_code==500):
-                 return "internal server error occured please try later."
-            else:
-                return f"unable to remove the excess content check your internet connection or try again later.the reason is{response.text}"
-        except Exception as e:
-             return f"unable to summarize content reason:{e}"
     def write_list_to_file(self, lst, filename):
         with open(filename, 'a', encoding='utf-8') as file:
             for item in lst:
@@ -105,14 +54,35 @@ class Backend:
 
         try:
             arguments = function_args
-            if hasattr(gemini_functions, function_name):
-                function_response = getattr(gemini_functions, function_name)(**arguments)
+            print("arguments:",arguments)
+            if hasattr(functions, function_name):
+                function_response = getattr(functions, function_name)(**arguments)
             else:
                 function_response = "ERROR: Called unknown function"
         except TypeError as e:
             function_response = f"ERROR: Invalid arguments:{e}"
+        fmessage = {
+                "role": "function",
+                "parts": [
+                    {
+                        "functionResponse": {
+                            "name": function_name,
+                            "response": {
+                                "name": function_name,
+                                "content": function_response
+                            }
+                        }
+                    }
+                ]
+            }
+            
+            # Save the function response to the JSON file and append to messages
+        with open("messages.json", "a") as f:
+                f.write(json.dumps(fmessage, indent=4))
+        self.messages.append(fmessage)
+    
 
-        return (function_name, function_response)
+        return self.process_message()
 
     
     def gemini(self):
@@ -120,7 +90,7 @@ class Backend:
         data = {
             "contents": [self.messages],
             "tools": [{
-                "functionDeclarations": gemini_functions.function_definitions
+                "functionDeclarations": functions.function_definitions
             }
 
             ],
@@ -144,14 +114,14 @@ class Backend:
                 },
             ],
            "generationConfig": {
-            "temperature": 0.7
+            "temperature": 0.3
         }
             
         }
         # count_tokens_response=requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:countTokens?key="+self.api_key,json=data1,headers=headers)
         
         if(self.count_tokens(self.messages)<30720):
-            response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" +self.api_key, json=data)
+            response = requests.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" +self.api_key, json=data)
             if response.status_code != 200:
                 print(f"errorcode:200->{response.text}")
                 if response.status_code==500:
@@ -182,46 +152,27 @@ class Backend:
         with open("messages.json", "a") as f:
                 f.write(json.dumps(message1, indent=4))
         self.messages.append(message1)
-        fcp=False
-        if any("functionCall" in part for part in message[0]):
-            for part in message:
-                if "functionCall" in part:  # Check if the current part contains "functionCall"
-                    function_name = part["functionCall"].get("name") 
-                    function_args=part["functionCall"].get("args")
-                    function_name, function_response = self.parse_function_response(function_name,function_args)
-                    fmessage = {
-                "role": "function",
-                "parts": [
-                    {
-                        "functionResponse": {
-                            "name": function_name,
-                            "response":
-                                {
-                                    "name": function_name,
-                                    "content": function_response
-                                }
-                        }
-                    }
-                ]
-              }
-                    with open("messages.json", "a") as f:
-                         f.write(json.dumps(fmessage, indent=4))
-                    self.messages.append(fmessage)
-                    response = self.gemini()
-                    fcp=True
-                    break
-            if not fcp:
-                for part in message:
-                    if "text" in part:
-                        return part["text"]
-            
-            
-            return response
-        else:
-            gemini_response = message[0]['text']
-            print(gemini_response)
-            self.backup_messages=self.messages
-            return gemini_response
+        return message
+    def process_message(self):
+        text_content = None
+        function_name = None
+        function_args = None
+        message=self.gemini()
+        # Parse through each part in the message to handle text and function call
+        for part in message:
+            if "text" in part:
+                text_content = part["text"]
+            if "functionCall" in part:
+                function_name = part["functionCall"].get("name")
+                function_args = part["functionCall"].get("args")
+    
+        # Process function call if present
+        if function_name:
+            # Execute function call
+            return self.parse_function_response(function_name, function_args)
+        return text_content  # Return only text if present
+
+
     def call_gemini(self, system_message=None):
         if system_message:
             message = {"role": "user", "parts": [{"text": system_message}]}
@@ -229,7 +180,7 @@ class Backend:
                 f.write(json.dumps(message, indent=4))
             self.messages=[]
             self.messages.append(message)
-        response = self.gemini()
+        response = self.process_message()
         if response:
             print("bot:", response)
             self.system_message_flag = response
@@ -258,14 +209,15 @@ class Backend:
         with open("messages.json", "a") as f:
                 f.write(json.dumps(message, indent=4))
         self.messages.append(message)
-        bot_response = self.gemini()
-        # self.speak_async(bot_response)
+        bot_response = self.process_message()
+        print(f"sending to the server:{bot_response}")
         return jsonify({'message': bot_response,'messages':self.messages})
     def send_pdf(self,message):
         with open("messages.json", "a") as f:
                 f.write(json.dumps(message, indent=4))
         self.messages.append(message)
-        response=self.gemini()
+        response=self.process_message()
+        print(f"sending to the server:{response}")
         return jsonify({'message':response,'messages':self.messages})
     def restart_server(self):
         print("restarting")
@@ -297,8 +249,10 @@ def save_keys():
     with open('.env', 'w') as f:
         f.write(f"""GOOGLE_API_KEY="{google_api_key}"\n""")
         f.write(f"""TF_ENABLE_ONEDNN_OPTS=0\n""")
-    load_dotenv()
+
     return jsonify({'success': True})
+
+
 
 backend = Backend()
 
@@ -309,12 +263,12 @@ def home():
 def no_camera_input():
     system_message =prompts[1]['start_without_camera']
     backend.call_gemini(system_message=system_message)
-    return render_template('test_input.html')
+    return render_template("input.html")
 @app.route('/input')
 def input():
     system_message =prompts[0]['start_with_camera']
     backend.call_gemini(system_message=system_message)
-    return render_template('test_input.html')
+    return render_template('input.html')
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -325,7 +279,7 @@ def upload_file():
     if file and file.filename.endswith('.pdf'):
         # Save the file to a desired location
         if not os.path.exists("documents"):
-               os.makedirs("documents")
+             os.makedirs("documents")
         file.save(os.path.join('documents', file.filename))
         print(file.filename)
         message = {
@@ -372,4 +326,4 @@ def open_browser():
 
 if __name__ == "__main__":
     Timer(1, open_browser).start()
-    app.run(host= "0.0.0.0",port="5000")
+    app.run(debug=True,host= "0.0.0.0",port="5000")

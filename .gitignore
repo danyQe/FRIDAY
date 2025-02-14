@@ -1,0 +1,12 @@
+venv/
+
+.env
+message.txt
+agentops.log
+screenshots/
+photos/
+documents/
+agents/
+.vscode/
+__pycache__
+test.py

@@ -1,222 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AssistX About Us</title>
-    <link rel="icon" href="/static/logo.png" type="image/png"> 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f7fc;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+    <title>R.O.L.E.X</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+    <script src="https://kit.fontawesome.com/618758b97a.js" crossorigin="anonymous"></script>
+</head>
 
-        header {
-            background-color: #11ed9c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            padding-top: 1px;
-        }
+<body>
 
-        h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        div p{
-             background-color: rgb(232, 230, 237);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 6px rgba(208, 104, 104, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-        }
-
-        p {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .team-member {
-            display: flex;
-            margin-bottom: 30px;
-            justify-content: center;
-        }
-        .team-member-info {
-            flex: 1;
-        }
-        nav {
-        background-color: #333; /* Change the background color */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add a box shadow */
-        display: flex;
-        justify-content: space-evenly;
-        }
-
-        nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-        justify-content: center; /* Center-align the navigation links horizontally */
-        }
-
-        nav li {
-        margin: 0 20px;
-        }
-
-        nav a {
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        font-size: 20px;
-        transition: color 0.3s;
-        }
-
-        .team-member img {
-         width: 150px;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 10px;;
-        margin-right: 20px;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        }
-
-        nav a:hover {
-        color: #15d36b;
-        }
-        footer
-            {
-            background-color: black;
-            color: white;
-            align-items: center;
-            text-align: center;
-            padding: 10px;
-            }
-            </style>
-        </head>
-    <body>
-    <header>
-        <h1>About Us</h1>
-        <nav> 
-            <a href="http://localhost:5000">Home</a>
-            <a href="http://localhost:5000/documentation">Documentation</a>
-            <a href="http://localhost:5000/contact">Contact us</a> 
-         </nav>
-    </header>
-
-    <div class="container">
-        <h2>Our Journey</h2>
-        <p>Our journey in creating the Virtual Assistant has been nothing short of an exhilarating adventure. As a group of ambitious undergraduates pursuing BSc in Computer Science, we embarked on this voyage with a shared dream of transforming the way people interact with technology.</p>
-        
-        <p><strong>The Genesis:</strong> It all began with an idea during a late-night brainstorming session. We pondered the potential of artificial intelligence and its ability to make technology more intuitive and accessible. That was the moment when the concept of our Virtual Assistant was born.</p>
-        
-        <p><strong>The Learning Curve:</strong> Building a Virtual Assistant from scratch wasn't a walk in the park. We dived headfirst into the world of natural language processing, machine learning, and user experience design. Countless hours were spent learning, experimenting, and iterating to hone our skills and bring this concept to fruition.</p>
-        
-        <p><strong>Teamwork and Collaboration:</strong> Collaboration has been at the core of our journey. Each team member brought unique skills and perspectives to the table. We learned to communicate effectively, divvy up tasks efficiently, and support each other through challenges. Our collaborative spirit was instrumental in overcoming obstacles.</p>
-        
-        <p><strong>The Challenges:</strong> Along the way, we encountered our fair share of challenges. Debugging complex code, fine-tuning AI algorithms, and ensuring a seamless user experience were just a few of the hurdles we faced. But with each obstacle, we grew stronger and more resilient.</p>
-        
-        <p><strong>User-Centric Approach:</strong> One of the key principles guiding our journey was a relentless focus on the end-user. We conducted user surveys, gathered feedback, and iterated on our Virtual Assistant's features to ensure it met real-world needs. This user-centric approach became our compass.</p>
-        
-        <p><strong>The Future:</strong> Our journey doesn't end here. In fact, it's just the beginning. We're committed to continually improving our Virtual Assistant, adding new functionalities, and adapting to the evolving needs of our users. We have a vision of making technology not just smarter but also more compassionate.</p>
-        
-        <p>We're excited about the road ahead and the opportunity to share our Virtual Assistant with the world. Our journey is a testament to the power of passion, teamwork, and the belief that technology can truly be a force for positive change.</p>
-        
-        <p>Thank you for joining us on this incredible journey as we redefine the future of human-computer interaction. Together, we'll make technology your greatest ally for success.</p>
-        
-        <h2>Project Concept</h2>
-<p>Our project, known as "Virtual Assistant," is born from a blend of passion, creativity, and a desire to simplify the way people interact with technology. As a team of undergraduate students pursuing BSc in Computer Science, we embarked on this journey with a vision to create a digital companion that not only understands but anticipates your needs.</p>
-
-<p><strong>The Idea:</strong> The idea behind our Virtual Assistant is to develop a cutting-edge software solution that serves as a reliable, intelligent, and user-friendly aid for individuals in their daily lives. Imagine a digital friend who can answer your questions, assist with tasks, and adapt to your preferences seamlessly.</p>
-
-<p><strong>How It Started:</strong> The inception of this project can be traced back to our shared enthusiasm for artificial intelligence and human-computer interaction. We were captivated by the potential of AI to make technology more accessible and user-centric. Thus, we decided to pool our skills and knowledge to bring this vision to life.</p>
-
-<p><strong>Implementation:</strong> Implementing our Virtual Assistant involves a combination of natural language processing (NLP), machine learning, and an intuitive user interface. We are dedicated to refining and expanding its capabilities continually. Our development process is marked by rigorous testing, user feedback, and the integration of the latest AI advancements.</p>
-
-<p><strong>Motivation:</strong> Our primary motivation is to create a tool that empowers individuals, simplifies complex tasks, and enhances productivity. We believe that technology should adapt to users, not the other way around. The joy of seeing our creation positively impact people's lives is what drives us every day.</p>
-
-<p>We invite you to be a part of this exciting journey as we work tirelessly to redefine the way people interact with technology. Our Virtual Assistant is not just a project; it's a vision of a future where technology truly becomes your ally for success.</p>
-
-        <h2>Our Mission</h2>
-        <p>Our mission is to redefine the way people interact with technology by creating intelligent and user-friendly solutions. We are a group of passionate undergraduate students pursuing BSc in Computer Science, driven by a shared goal:</p>
-        
-        <p><strong>Empowerment Through Technology:</strong> We aim to empower individuals from all walks of life to harness the full potential of technology, making it a valuable tool for personal and professional growth.</p>
-        
-        <ol><strong> our mission, we are committed to:</strong></ol>
-        
-        <ul>
-            <li><strong>Innovation:</strong> Continuously innovating and developing cutting-edge solutions that simplify complex tasks.</li>
-            <li><strong>Accessibility:</strong> Ensuring our products are accessible to everyone, regardless of their technical background.</li>
-            <li><strong>Privacy and Security:</strong> Prioritizing user data protection and ensuring that our technology is secure.</li>
-            <li><strong>Education:</strong> Promoting digital literacy and providing resources to help users make the most of our technology.</li>
-            <li><strong>Community:</strong> Building a vibrant and supportive community around our products, where users can share experiences and insights.</li>
-        </ul>
-        
-        <p>We are inspired by the potential of technology to transform lives positively. Our mission is not just about creating software; it's about creating opportunities, bridging gaps, and fostering a deeper connection between humans and machines.</p>
-        
-        <p>We invite you to join us on this exciting journey as we work towards a future where technology truly becomes your ally for success.</p>
-        
-
-        <h2>Meet Our Team</h2>
-        <div class="team-member">
-            <img src="/static/ph1.jpg" alt="Team Member 1">
-            <div class="team-member-info">
-                <h3>Goutham Dechineni</h3>
-                <p>AI Specialist</p>
-                <p>Goutham's expertise in artificial intelligence drives the intelligence behind our virtual assistant. He's committed to continuous learning in this ever-evolving field.</p>
+    <Section class="Navigation-bar">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Rolex.png') }}" alt="">
             </div>
+            <ul>
+                
+                <li><a href=""><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="#"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li class="logbtn"><a href="login"><i class="fa-solid fa-user"></i>  Log In</a></li>
+                
+            </ul>
         </div>
-
-        <div class="team-member">    
-            <img src="/static/ph3.png" alt="Team Member 2">
-            <div class="team-member-info">
-                <h3>Jayesh Sawkare </h3>
-                <p>UI/UX Designer</p>
-                <p>Jayesh has an eye for design and a user-centric approach. he ensures that our virtual assistant is not only functional but also visually appealing.</p>
-            </div>
+    </Section>
+    <section class="about-section">
+        <h2>About Us</h2>
+        <div class="about-project">
+            <p>Welcome to Rolex !!</p>
+        
+        <p id="project-cap">At Rolex, we are committed to revolutionizing the way you interact with technology. Our mission is to create a personal voice assistant that understands your needs, simplifies your daily tasks, and enhances your lifestyle.</p>
         </div>
-
-        <div class="team-member">
-            <img src="/static/ph2.jpg" alt="Team Member 3">
-            <div class="team-member-info">
-                <h3>Rajeshwar Awrul</h3>
-                <p>Lead Developer</p>
-                <p>Rajeshwar is a coding enthusiast who believes in the potential of technology to solve real-world problems. He's passionate about creating clean and efficient code.</p>  
-            </div>
+        <br>
+        <div class="about-details">
+            <p><i class="fa-solid fa-face-smile"></i><br><h4>Who We Are</h4></p>
+            
+            <br>
+            <p>We are a diverse team of AI enthusiasts, software developers, and user experience designers, united by a passion for innovation. With backgrounds in technology and a focus on user-centric design, we aim to deliver a seamless, intuitive voice assistant that feels like a natural extension of your day-to-day life.</p>
         </div>
+        <div class="about-details">
+            <p><i class="fa-solid fa-eye-low-vision"></i><br><h4>Our Vision</h4></p>
+            
+            <br>
+            <p>We envision a world where technology is effortless and accessible. Our voice assistant is designed to learn from you, adapt to your preferences, and provide personalized support—whether it’s managing your schedule, answering questions, or controlling smart home devices.
+            </p>
+        </div>
+        <div class="about-details">
+            <p><i class="fa-solid fa-plane-departure"></i><br><h4>Join Us On This Journey</h4></p>
+            
+            <br>
+            <p>As we continue to evolve and improve, we invite you to be part of our community. Your feedback and insights are invaluable in shaping a voice assistant that truly works for you.</p>
+        </div>
+        <p id="thankmsg">
+            Thank you for exploring Rolex together, let’s make technology a little more human. <i class="fa-solid fa-handshake"></i>
+        </p>
 
-        <h2>Our Vision</h2>
-<p>At our core, we envision a world where technology seamlessly integrates with our daily lives to make them simpler, more productive, and enjoyable. Our virtual assistant is a step towards realizing this vision.</p>
-
-<ol><strong>We believe in:</strong></ol>
-<ul>
-    <li><strong>Inclusivity:</strong> Ensuring that our technology is accessible to all, regardless of age, background, or ability.</li>
-    <li><strong>Innovation:</strong> Continuously pushing the boundaries of what's possible, exploring new AI capabilities, and staying at the forefront of technological advancements.</li>
-    <li><strong>User Empowerment:</strong> Providing users with tools and knowledge to take control of their digital experiences, fostering digital literacy.</li>
-    <li><strong>Ethical AI:</strong> Upholding the highest ethical standards in AI development, respecting privacy, and safeguarding against biases.</li>
-</ul>
-
-<p>Our vision extends beyond our virtual assistant; it encompasses a future where technology is a force for good, enhancing human potential, and enriching lives.</p>
-
-<p>We invite you to join us on this journey and be part of a world where technology truly becomes your ally for success.</p>
-
-       </div>
-       <footer>@group8 All rights Reserved</footer>
-
+    </section>
+    <footer>
+        <p>&copy; 2024 @group 2. All rights reserved.</p>
+    </footer>
 </body>
+
 </html>
