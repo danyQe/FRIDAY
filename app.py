@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user,current_user
 import webbrowser
+from threading import Timer
 from utils.config import Config
 from utils.rate_limiter import RateLimiter
 from utils.gemini_client import GeminiClient
@@ -32,7 +33,7 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(int(user_id))
 
 
 config = Config()
@@ -61,7 +62,7 @@ def send_message():
         # Get recent conversation history
         
         # Send message to Gemini
-        response = gemini_client.send_message(message)
+        response = gemini_client.send_message(message,current_user.name)
         
         # Save to memory
         
@@ -204,7 +205,7 @@ def open_browser():
     webbrowser.open('http://localhost:5000')
 
 if __name__ == "__main__":
-    # Timer(1, open_browser).start()
+    Timer(1, open_browser).start()
     with app.app_context():
         db.create_all()
-    app.run(host="0.0.0.0", debug=True, port="5000")
+    app.run(host="0.0.0.0",debug=True, port="5000")

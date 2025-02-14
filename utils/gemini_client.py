@@ -15,7 +15,7 @@ class GeminiClient:
         self.memory=MemoryManager()
         self.chat = self.client.chats.create(model="gemini-1.5-flash",config=self.config)
         
-    def send_message(self, message: str, history: Optional[list] = None) -> str:
+    def send_message(self, message: str, user_name:str,history: Optional[list] = None) -> str:
         estimated_tokens = len(message.split()) * 2  # Rough estimation
         
         if not self.rate_limiter.can_make_request(estimated_tokens):
@@ -23,8 +23,6 @@ class GeminiClient:
             
         try:
             print("chat:",self.chat._curated_history)
-            with open("message.txt",'w') as f:
-                 f.write(str(self.chat._curated_history))
             memories=self.memory.get_recent_conversations(message)
             print("previous_memories:",memories)
             response = self.chat.send_message(f"{message}\nrelevant memories :{str(memories)}")
@@ -33,7 +31,7 @@ class GeminiClient:
             for message in self.chat._curated_history:
                 print(f'role - ', message.role, end=": ")
                 print(message.parts[0].text)
-            self.memory.add_conversation(message,response.text)
+            self.memory.add_conversation(message,response.text,user_name)
             if response.candidates[0].content.parts[0].function_call:
                 function_call=response.candidates[0].content.parts[0].function_call
                 print("function_called:",function_call.name)

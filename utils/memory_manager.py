@@ -36,14 +36,14 @@ class MemoryManager:
         })
         
         
-    def add_conversation(self, user_message: str, response: str):
+    def add_conversation(self, user_message: str, response: str,user_name:str):
         """Add conversation to memory"""
         # Add user and assistant messages to the memory
         
         self.memory.add([{
                 "role": "user","content":user_message},{
                 "role":"assistant","content": response
-            }],user_id="default_user",agent_id="rolex")
+            }],user_id=user_name,agent_id="rolex")
         
     def get_recent_conversations(self, user_message:str,limit: int = 10) -> List[dict]:
         """Get recent conversations from memory"""
