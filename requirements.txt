@@ -22,3 +22,8 @@ flask-login
 werkzeug
 Flask-Login
 db-sqlite3
+langchain
+langchain-community
+langchain-ollama
+langchain-experimental
+neo4j
