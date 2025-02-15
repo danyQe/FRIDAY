@@ -1,132 +1,58 @@
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <title>AssistX-Your virtual Assistant</title>
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nabla">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js')}}" defer></script>
-</head>
-<body>
-    <div class="hero">
-        <nav> 
-        <div class="logo"><img src="{{ url_for('static', filename='logo.png')}}" alt="assistX"></div>
-        <!-- <a href="reasearch.html">Research</a> -->
-        <a href="http://localhost:5000/documentation">Documentation</a>
-        <!-- <a href="http://localhost:5000/resources">Resources</a> -->
-        <a href="http://localhost:5000/about">about us</a>
-        <a href="http://localhost:5000/contact">Contact us</a> 
-        </nav>
-            <div class="word">
-                <!-- <h2>Innovative assistance,
-                    <br>Infinite Possibilities</h2> -->
-            </div> <br>       
-            <div id="loader" class="loader"></div>
-            <div class="start-button-container">
-              <button id="start-button" class="animate-button">Get started</button>          
-         </div>   
-         <div id="popup" class="popup">
-          <div class="popup-content">
-            <span class="close" id="closePopup">&times;</span>
-            <h2>Note:</h2>
-            <p>Before we proceed, we need your permission to access your camera. We'll be using it to take your picture and analyze your facial expressions and approximate age for a personalized experience.</p>
-            <p>Rest assured, your data is securely stored locally on your device, ensuring your privacy and confidentiality.</p>
-            <p>By clicking the Start button, you agree to grant us access to your camera for these purposes. If you have any concerns or questions about how your data is handled, please feel free to reach out to us.</p>
-            <div class="popup-button-container"><div class="disagree-box-container"><button id="disagreeButton">No,I want to continue without camera</button></div>
-            <div class="confirm-box-container"><button id="confirmButton">Agree</button></div></div>
-          </div>
-        </div>
-        <div id="apiKeyPopup" class="settings" style="display: none;">
-          Enter your Google api key: <a href="https://ai.google.dev/" target="_blank">get google api key</a>
-          <br>  
-          <input type="text" id="googleApiKey" placeholder="Enter your Google API key" required>
-          <br>
-          <button id="save_api_button">Submit</button>
-      </div>
-  
-         <video class="hero-video" autoplay muted loop>
-            <source src="{{ url_for('static', filename='home_video.mp4')}}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <a href="#main"><i class="arrow up"></i></a>
-    </div>
-    <main id="main">
-        <h2>What is a Virtual Assistant?</h2>
-        <p>
-          A virtual assistant (VA) is a self-employed professional who provides
-          administrative, creative, technical, or other support services to
-          businesses, entrepreneurs, or busy individuals from a remote location.
-          Virtual assistants utilize technology and communication tools to deliver
-          their services efficiently.
-        </p>
-  
-        <h2>Importance of Virtual Assistant.</h2>
-        <p>
-          Virtual assistants play a crucial role in today's fast-paced business
-          environment. Their importance stems from:
-        </p>
-        <ul>
-          <li>
-            Cost-Effective Support: Hiring virtual assistants is often more
-            cost-effective than hiring full-time employees, as you pay for the
-            specific services you need.
-          </li>
-          <li>
-            Flexibility: VAs can adapt to changing workloads and project
-            requirements, providing flexibility to businesses.
-          </li>
-          <li>
-            Time Savings: Delegating tasks to VAs allows you to focus on core
-            business activities and strategic goals.
-          </li>
-          <li>
-            Access to Skills: You can tap into a wide range of skills and
-            expertise by working with virtual assistants with diverse backgrounds.
-          </li>
-        </ul>
-  
-        <h2>Uses of Virtual Assistants</h2>
-        <p>
-          Virtual assistants can assist with various tasks and functions,
-          including:
-        </p>
-        <ul>
-          <li>
-            Administrative Support: Managing emails, scheduling appointments, data
-            entry, and bookkeeping.
-          </li>
-          <li>
-            Customer Support: Handling customer inquiries, providing support, and
-            managing helpdesk systems.
-          </li>
-          <li>
-            Content Creation: Writing blog posts, articles, social media content,
-            and marketing materials.
-          </li>
-          <li>
-            Research: Conducting market research, competitor analysis, and
-            industry trends research.
-          </li>
-          <li>
-            Design and Multimedia: Creating graphics, videos, and other multimedia
-            content.
-          </li>
-          <li>
-            Website Management: Updating websites, adding content, and ensuring
-            site functionality.
-          </li>
-        </ul>
-      </main>
-  
-    <footer>@group8 All rights Reserved</footer>
-    <!-- <script>
-     const startButton = document.getElementById("start-button-container");
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>R.O.L.E.X</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/618758b97a.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <Section class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Rolex.png') }}" alt="logo">
+            </div>
+            <div>
+                <nav>
+                    <ul>
+                    
+                        <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+                        <li><a href="contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                        <li><a href="about"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>
+            <div class="loginbtn">
+                <button class="nbtn"id="btn" onclick="loginpage()"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Log In</button>
+            </div>
+                
+        </Section>
+        
+         
+           
+            <video class="header" src="{{ url_for('static', filename='backgroundvideo.mp4') }}" type="video/mp4" autoplay loop muted>
+            
+             
 
-      startButton.addEventListener("click", function () {
-        window.location.href = "input.html"; // Replace with the actual URL of your Virtual Assistant page
-      });
-        </script> -->
-</body>
+            </video>
+            <div class="details">
+                <h1>R.O.L.E.X</h1>
+                <br>
+                <h3>Hello User !!!</h3>
+                <h4>Welcome To The System</h4>
+                <h2 id="connection">Connection Established !!</h2>
+
+            </div>
+            <button id="btn" class="btn nbtn" onclick="loginpage()">
+                Get Started
+            </button>
+        
+        
+       
+        <script src="{{ url_for('static', filename='index.js') }}" async defer></script>
+    </body>
 </html>

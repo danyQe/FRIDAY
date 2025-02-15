@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AssistX Documentation</title>
-    <link rel="icon" href="/static/logo.png" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
     <style>
         /* Reset some default styles */
         body,
@@ -285,7 +285,7 @@
                 </p>
 
                 <div class="image-container">
-                    <img src="/static/flowchart.png" alt="Architecture Diagram">
+                    <img src="{{ url_for('static', filename='flowchart,png') }}" alt="Architecture Diagram">
                 </div>
 
             </section>

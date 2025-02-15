@@ -4,181 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AssistX contact us</title>
-    <link rel="icon" href="/backend/static/logo.png" type="image/png">
-    <link rel="stylesheet" href="port.css">
-    <style>
-        /* Reset some default styles */
-        body,
-        h1,
-        h2,
-        p {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Global styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f7fc;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        a {
-            color: #140505;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Header styles */
-        header {
-            background-color: #11ed9c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
-        }
-
-        header h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        /* Navigation styles */
-        nav {
-            background-color: #333;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            /* background-color: #1f1f1f; */
-            padding: 5px;
-            margin: 0;
-        }
-
-        nav li {
-            margin: 0 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #15d36b;
-        }
-
-        /* Contact section styles */
-        .contact-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(230, 226, 226, 0.1);
-            margin-top: 20px;
-        }
-
-        .contact-section h2 {
-            color: rgb(21, 15, 15);
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .sub-office {
-            background-color: rgb(232, 230, 237);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .sub-office h3 {
-            color: #100101;
-            font-size: 24px;
-        }
-
-        .sub-office p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-        /* Footer styles */
-        footer
-            {
-            background-color: black;
-            color: white;
-            align-items: center;
-            text-align: center;
-            padding: 10px;
-            }
-
-    </style>
-    <title>Contact Us</title>
+    <title>R.O.L.E.X</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <script src="https://kit.fontawesome.com/618758b97a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
-        <h1>Contact Us</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="http://localhost:5000">Home</a></li>
-            <li><a href="http://localhost:5000/documentation">Documentation</a></li>
-            <!-- <a href="references.html">Resources</a> -->
-            <li><a href="http://localhost:5000/about">About us</a></li>
-            <!-- <li><a href="contact.html">Contact</a></li> -->
-        </ul>
-    </nav>
+
+    <Section class="Navigation-bar">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Rolex.png') }}" alt="">
+            </div>
+            <ul>
+                
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="about"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li class="logbtn"><a href="login"><i class="fa-solid fa-user"></i>  Log In</a></li>
+                
+            </ul>
+        </div>
+    </Section>
     <section class="contact-section">
         <h2>Contact Our Developers</h2>
         <div class="sub-office">
-            <h3>JAYESH SAWKARE</h3>
-            <p>UI/UX Designer</p>
-            <p>Mobile Number: +919766372800</p>
-            <p>Email: jayeshsawkare@gmail.com</p>
-            <p>Twitter: <a href="https://twitter.com/JAYESH15594399?t=dfU9MJI7JWRwhjgWLD5yEg&s=09" target="_blank"
-                    rel="noopener noreferrer">@JAYESH</a></p>
-            <p>Instagram: <a href="https://instagram.com/iam_jayesh11?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"
-                    rel="noopener noreferrer">iam_jayesh11</a></p>
+            <h3>Amol Ingole</h3>
+            <p>Mobile Number : +91 9322494606</p>
+            <p>Email : amol40226@gmail.com</p>
+            <p><a
+                href="https://www.linkedin.com/in/amol-ingole-4b61bb283?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BQq%2BtyoR5Rk6Sp5MacnGbZg%3D%3D"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a></p>
         </div>
         <div class="sub-office">
-            <h3>Goutham Dechineni</h3>
-            <p>AI Specialist</p>
-            <p>Mobile Number: +918919233671</p>
-            <p>Email: raogoutham374@gmail.com</p>
-            <p>LinkedIn: <a
-                    href="https://www.linkedin.com/in/goutham-dechineni-040b78271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app    "
-                    target="_blank" rel="noopener noreferrer">Goutham Dechineni</a></p>
-            <p>Instagram: <a href="https://instagram.com/mr_d_goutham_?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"
-                    rel="noopener noreferrer">mr_d_goutham_</a></p>
+            <h3>Karan Ghuge</h3>
+            <p>Mobile Number : +91 9356524327</p>
+            <p>Email : gkaran9356@gmail.com</p>
+            <p><a
+                href="https://www.linkedin.com/in/karan-ghuge-aaa851317?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a></p>
+
         </div>
         <div class="sub-office">
-            <h3>Rajeshwar Awrul</h3>
-                <p>Lead Developer</p>
-            <p>Mobile Number: +917620408053</p>
-            <p>Email: rajeshwarawrul@gmail.com</p>
-            <p>Twitter: <a href="https://twitter.com/Raj143W?t=KRqjk9XCSG5rlO3pXeVPCA&s=09" target="_blank"
-                    rel="noopener noreferrer">aim_2k26</a></p>
-            <p>Instagram: <a href="https://instagram.com/aim_2k26?igshid=MWZjMTM2ODFkZg==" target="_blank"
-                    rel="noopener noreferrer">rajeshwar_awrul</a></p>
+            <h3>Ravikiran Tirnagarwar</h3>
+             
+            <p>Mobile Number : +91 8799965710</p>
+            <p>Email : ravitirnagarwar99@gmail.com</p>
+            <p><a
+                href="https://www.linkedin.com/in/ravikiran-tirnagarwar-7130a42aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a></p>
         </div>
 
     </section>
     <footer>
-        <p>&copy; 2023 @group8. All rights reserved.</p>
+        <p>&copy; 2024 @group 2. All rights reserved.</p>
     </footer>
 </body>
 

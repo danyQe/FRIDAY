@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R.O.L.E.X - Login</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <script src="https://kit.fontawesome.com/618758b97a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <Section class="Navigation-bar">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Rolex.png') }}" alt="">
+            </div>
+            <ul>
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="about"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <!-- <li class="logbtn"><a href="login"><i class="fa-solid fa-user"></i> Log In</a></li> -->
+            </ul>
+        </div>
+    </Section>
+
+    <section class="login-form">
+        <div class="side1">
+            <img src="{{ url_for('static', filename='side1imgc.jpg') }}" alt="">
+        </div>
+
+        <div class="side2">
+            <form action="{{ url_for('login') }}" method="post">
+                <h1> Login</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <br>
+                    <label for="email">Email ID:</label><br>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </p><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" minlength="8" maxlength="12" 
+                           placeholder="Enter password" required>
+                </p><br>
+                <button type="submit"><i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;Login</button>
+                <p class="login-link">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 @group 2. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

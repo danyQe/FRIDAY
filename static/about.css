@@ -1,0 +1,116 @@
+
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Gilroy-Bold', sans-serif;
+    
+}
+body{
+    background-color: #1c1c1c;
+}
+
+.Navigation-bar .navbar .logo img{
+    width:100px;
+    height:25px;
+    float:left;
+    
+}
+.Navigation-bar .navbar{
+    background-color: #000;
+    padding: 15px 25px;
+}
+
+.Navigation-bar .navbar ul{
+    display:flex;
+    justify-content: flex-end;
+    text-decoration: none;
+}
+.Navigation-bar .navbar ul li{
+    display: flex;
+    align-items: center;
+    margin-left:80px;
+}
+.Navigation-bar .navbar ul li a{
+    color:#69E5E5;
+    font-size: 21px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+        /* Contact section styles */
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ededed;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(230, 226, 226, 0.1);
+            margin-top:25px;
+            margin-bottom: 25px;
+            
+        }
+
+        .about-section h2 {
+            color: #000;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-project p{
+            color:#141414;
+            font-size:24px;
+        }
+
+        .about-project #project-cap{
+                font-size:16px;
+        }
+
+        .about-details{
+            background-color: #201d1d;
+            border-radius: 20px;
+            padding:30px 50px;
+            box-shadow: 10px 10px 10px rgba(82, 80, 80, 0.998);
+            margin-bottom: 25px;
+            color:#fff;
+            border: 3px solid #69E5E5;
+        }
+
+        .about-details h4 {
+            color: #69E5E5;
+            font-size: 24px;
+        }
+
+        .about-details p {
+            font-size: 18px;
+            margin:5px 0;
+        }
+        .about-details p i{
+            font-size:30px;
+            color:#69E5E5;
+        }
+
+        #thankmsg{
+            color:rgb(116, 10, 186);
+            font-style: italic;
+            font-weight: bold;
+            font-size:22px;
+        }
+        /* Footer styles */
+        footer
+            {
+            background-color: black;
+            color:#69E5E5;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            }
+
+            .logbtn{
+                border:1px solid #69E5E5;  
+                padding:5px 10px;
+                background-color: transparent;
+                
+            }

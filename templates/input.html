@@ -1,529 +1,982 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input</title>
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}"> -->
-    <!-- <script src="{{ url_for('static', filename='script.js')}}"></script> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>R.O.L.E.X</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-          /* body {
-            background-image: url("{{ url_for('static', filename='5.jpg')}}");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-        } */
-        body, html {
-            width: 100%;
+        @import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gilroy-Bold', sans-serif;
+            background-color: #000;
         }
 
-        body {
-            background-image: url("{{ url_for('static', filename='5.jpg')}}");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            background-color: black;
-        }
-
-        #microphone-container {
-          
+        /* Navigation Bar */
+        .Navigation-bar .navbar {
+            background-color: #000;
+            padding: 15px 25px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            flex-wrap: nowrap;
-            flex-direction: column-reverse;
-            align-content: space-around;
         }
-        #microphone-container-full
-        {
+
+        .Navigation-bar .navbar .logo img {
+            width: 100px;
+            height: 25px;
+        }
+
+        .Navigation-bar .navbar ul {
             display: flex;
             align-items: center;
-            justify-content: center;
-            height: 40vh;
-            width: 100vw;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
-        .microphone {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: green url("{{ url_for('static', filename='microphone.png')}}") center/cover;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+        .Navigation-bar .navbar ul li {
+            margin-left: 40px;
         }
 
-        .microphone:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        .Navigation-bar .navbar ul li a {
+            color: #69E5E5;
+            font-size: 21px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        #voice-wave-container {
+        /* Header Section */
+        .header {
+            min-height: calc(100vh - 60px);
+            padding: 20px;
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-            width: 200px;
-            /* height: 70px; */
         }
 
-        textarea {
-            width: 80%;
-            height: 25px;
-            padding: 9px;
-            border: 2px solid #ccc;
-            border-radius: 15px;
-            font-size: 16px;
-            background-color: rgba(255, 255, 255, 0.7);
+        .header h1 {
+            padding: 3px 10px;
+            font-weight: 600;
+            font-size: 90px;
+            color: #69E5E5;
         }
-        #text-button {
-            height: 40px;
-            background-color: rgb(49, 246, 15);
-            padding: 10px;
+
+        .header .details {
+            position: relative;
+            color: #69E5E5;
             text-align: center;
-            font-size: 18px;
-            border-radius: 12px;
-            margin-left: 10px;
-            cursor: pointer;
+            margin: 1rem 0;
+            z-index: 2;
         }
 
-        #text-button:hover {
-            background-color: aquamarine;
-        }
-
-        #bars {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            display: none;
-            height:200px;
-            width:70px;
-            width:auto;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            height: 50px;
-            justify-content: space-around;
-            background-color: black;
-            padding: 5px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            cursor: pointer;
+        .details h3 {
+            font-weight: 600;
             font-size: 25px;
+            border-bottom: 2px solid #69E5E5;
+            padding: 3px;
+            display: inline-block;
         }
 
-        nav a:hover {
-            color: #3c3b3bdb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        #background-video {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
-        #close-button {
-            display: none;
-            height: 50px;
-            width: 50px;
-            background-color: red;
-            text-align: center;
-            text-decoration: double;
-            border-radius: 50%;
-            font-size: 50px;
-            color: white;
-            cursor: pointer;
-            margin-top: 40px;
-            font-weight: bolder;
+        /* Chat Container */
+        .chat-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            height: 60vh; /* Change to */
+            height: calc(100vh - 300px);
+            min-height: 300px;
+            margin: 20px auto;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
         }
 
-        .chat-box {
-            background-color: #fbfbfb;
-            color: black;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 7px;
-            width:80%;
-            max-height: 60%;
-            overflow-y:auto;
-        }
-
-        .bar {
-            background: #fbfbfb;
-            bottom: 1px;
-            height: 3px;
-            width: 10px;
-            margin: 0px 4px;
-            border-radius: 5px;
-            animation: sound 0ms -600ms linear infinite alternate;
-        }
-
-        @keyframes sound {
-            0% {
-                opacity: .35;
-                height: 3px;
-            }
-            100% {
-                opacity: 1;
-                height: 70px;
-            }
-        }
-
-        .bar:nth-child(1) { animation-duration: 474ms; }
-        .bar:nth-child(2) { animation-duration: 433ms; }
-        .bar:nth-child(3) { animation-duration: 407ms; }
-        .bar:nth-child(4) { animation-duration: 458ms; }
-        .bar:nth-child(5) { animation-duration: 400ms; }
-        .bar:nth-child(6) { animation-duration: 427ms; }
-        .bar:nth-child(7) { animation-duration: 441ms; }
-        .bar:nth-child(8) { animation-duration: 419ms; }
-        .bar:nth-child(9) { animation-duration: 487ms; }
-        .bar:nth-child(10) { animation-duration: 442ms; }
-
-       
-        #restart-button{
-            background-color:black;
-            color: white;
-            cursor:pointer;
-            width:70px;
+        #chatbox {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #69E5E5;
             border-radius: 10px;
-            transition:transform 0.2s,box-shadow 0.2s;
-        }
-        #display-message{
+            padding: 20px;
+            overflow-y: auto;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
         }
-        #buttons{
-            display: flex;
-            justify-content: flex-end;
-        }
-        #settings{
-            background-color: #ccccccb5;
-            color:black;
-            height:10px;
 
+        .userText, .botText {
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease-in-out;
         }
-        #input-box-container{
-            display: flex;
-            /* align-items: flex-start; */
-            justify-content:center;
+
+        .userText {
+            background-color: #69E5E5;
+            color: #000;
+            align-self: flex-end;
+        }
+
+        .botText {
+            background-color: #333;
+            color: #69E5E5;
+            align-self: flex-start;
+        }
+        .userText p, .botText p {
+            margin: 0 0 10px 0;
+            background: transparent; /* Override the global * selector */
+        }
+        
+        .userText p:last-child, .botText p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .botText a {
+            color: #a0ffff;
+            text-decoration: underline;
+            background: transparent;
+        }
+        
+        .botText a:hover {
+            color: #ffffff;
+        }
+        
+        .botText ul, .botText li {
+            background: transparent;
+            margin-left: 20px;
+        }
+        
+        .botText ul {
+            padding-left: 0;
+            list-style-type: disc;
+        }
+        
+        .botText strong, .botText em {
+            background: transparent;
+        }
+        
+        h2 {
+            color: #69E5E5;
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        pre {
+            background-color: #111;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        code {
+            color: #69E5E5;
+            background-color: transparent;
+            font-family: monospace;
+        }
+
+        /* Voice Control UI */
+        .voice-controls {
             position: fixed;
-            width:100%;
-            bottom: 10px;
+            top: 80px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #69E5E5;
+            z-index: 1000;
         }
-        .chat-box-container{
+
+        .voice-select-container {
+            margin-bottom: 10px;
+        }
+
+        #voice-select {
+            width: 200px;
+            padding: 8px;
+            background: transparent;
+            color: #69E5E5;
+            border: 1px solid #69E5E5;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .speech-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #69E5E5;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000;
+            border: 1px solid #69E5E5;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 3px;
+            background-color: #69E5E5;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #69E5E5;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: #000;
+        }
+
+        /* Input Footer */
+        .header .inputfooter {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 0 20px;
+            margin-top: auto;
         }
-        .userText {
-            color: blue;
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin: 0;
         }
-        .botText {
-            color: green;
+
+        .subbtn {
+            border: 1px solid #69E5E5;
+            color: #69E5E5;
+            background-color: transparent;
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            white-space: nowrap;
+            cursor: pointer;
         }
-        .codeText {
-            white-space: pre-wrap; /* Preserve whitespace and wrap lines */
-            font-family: monospace; /* Use monospace font for code */
-            background-color: #f0f0f0; /* Light gray background for code block */
-            padding: 10px; /* Add padding for better readability */
-            border-radius: 5px; /* Add rounded corners */
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .searchbar {
+            flex: 1;
+            margin: 0;
+        }
+
+        .searchbar input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            outline: none;
+            border: 2px solid #69E5E5;
+            font-size: 16px;
+            color: #fff;
+            background-color: transparent;
+        }
+
+        #micButton {
+            background-color: #69E5E5;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: black;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        #micButton:hover {
+            background-color: #429191;
+        }
+
+        /* Voice Wave Animation */
+        .voice-wave {
+            display: none;
+            gap: 3px;
+            align-items: center;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        .voice-wave .bar {
+            width: 3px;
+            height: 20px;
+            background: #69E5E5;
+            border-radius: 3px;
+            animation: soundwave 1s infinite ease-in-out;
+        }
+        .voice-wave .bar:nth-child(1) { animation-delay: 0.0s; }
+        .voice-wave .bar:nth-child(2) { animation-delay: 0.2s; }
+        .voice-wave .bar:nth-child(3) { animation-delay: 0.4s; }
+        .voice-wave .bar:nth-child(4) { animation-delay: 0.6s; }
+        .voice-wave .bar:nth-child(5) { animation-delay: 0.8s; }
+        /* Stop Button */
+        @keyframes soundwave {
+             0%, 100% { height: 10px; }
+             50% { height: 30px; }
+         }
+        #stop-button {
+            display: none;
+            background-color: #ff4444;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        #stop-button:hover {
+            background-color: #cc0000;
+        }
+
+        .logbtn {
+            border: 1px solid #69E5E5;
+            padding: 5px 10px;
+            background-color: transparent;
+        }
+
+        /* Loading indicator */
+        .loading-spinner {
+            display: none;
+            width: 25px;
+            height: 25px;
+            border: 3px solid rgba(105, 229, 229, 0.3);
+            border-radius: 50%;
+            border-top-color: #69E5E5;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        [data-tooltip] {
+            position: relative;
+        }
+        
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
+            background: #000;
+            color: #69E5E5;
+            border: 1px solid #69E5E5;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        [data-tooltip]:hover:before {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 10px);
+            
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .processing .searchbar input,
+        .processing #text-button,
+        .processing #micButton {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .header h1 {
+                font-size: 70px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .Navigation-bar .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .Navigation-bar .navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .Navigation-bar .navbar ul li {
+                margin: 10px 20px;
+            }
+
+            .header h1 {
+                font-size: 50px;
+            }
+
+            .voice-controls {
+                position: fixed;
+                top: auto;
+                bottom: 80px;
+                left: 20px;
+                right: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .voice-select-container, .speech-toggle-container {
+                margin: 0;
+            }
+            .chat-container {
+                height: 50vh;
+            }
+
+            .header .inputfooter {
+                flex-wrap: wrap;
+            }
+
+            .searchbar {
+                order: -1;
+                width: 100%;
+            }
+            #background-video {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    
+        @media screen and (max-width: 480px) {
+            .Navigation-bar .navbar ul li a {
+                font-size: 16px;
+            }
+
+            .header h1 {
+                font-size: 40px;
+            }
+            subbtn, #micButton, #stop-button {
+                transition: all 0.2s ease-in-out;
+            }
+            
+            .subbtn:hover, #micButton:hover, #stop-button:hover {
+                transform: scale(1.05);
+            }
+            
+            .subbtn:active, #micButton:active, #stop-button:active {
+                transform: scale(0.95);
+            }
+            .subbtn {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+
+            .searchbar input {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            #micButton, #stop-button {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
         }
     </style>
+    <script src="https://kit.fontawesome.com/618758b97a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav>
-        <a href="http://localhost:5000/">Home</a>
-        <a href="http://localhost:5000/documentation">Documentation</a>
-        <a href="http://localhost:5000/about">About us</a>
-        <a href="http://localhost:5000/contact">Contact us</a>
-        <a href="http://localhost:5000/resources">Resources</a>
-    </nav><br>
-   <div id="buttons">
-        <button id="restart-button">Restart</button>
-     </div> 
-    <div id="display-message"><h2>Ask me Something!!</h2></div>
-    <div id="microphone-container-full">
-    <div id="microphone-container">
-        <div class="close-button" id="close-button">&times;</div><br>
-        <div class="microphone" id="microphone"></div><br>
-        <div id="voice-wave-container">
-            <div id="bars">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+    <section class="Navigation-bar">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Rolex.png') }}" alt="">
+            </div>
+            <ul>
+                <li><ahref="index"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+                <li><a href="about"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li class="logbtn"><a href="logout"><i class="fa-solid fa-user"></i> Log out</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="header">
+        <video id="background-video" src="{{ url_for('static', filename='siri (online-video-cutter.com).mp4') }}" autoplay loop muted>
+        </video>
+        
+        <div class="details">
+            <h1>R.O.L.E.X</h1>
+            <br>
+            <!-- <h3>Hello {{user_name}} !!!</h3> -->
+        </div>
+
+        <div class="voice-controls">
+            <div class="voice-select-container">
+                <select id="voice-select"></select>
+            </div>
+            <div class="speech-toggle-container">
+                <span>ROLEX Speech:</span>
+                <label class="switch">
+                    <input type="checkbox" id="speech-toggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div id="chatbox">
+                <!-- <p class="botText">Hello! I'm ROLEX. How can I assist you today?</p> -->
+            </div>
+        </div>
+
+        <div class="inputfooter">
+            <p class="upload-btn-wrapper">
+                <button class="subbtn" id="upload-button" data-tooltip="Upload PDF"><i class="fa-solid fa-file"></i>&nbsp;Upload</button>                <input type="file" id="file-input" accept=".pdf" />
+            </p>
+            
+            <p class="searchbar">
+                <input type="text" id="text-box" placeholder="Enter your message...">
+            </p>
+
+            <button id="text-button" class="subbtn" data-tooltip="Send message">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            
+            <div id="micButton" data-tooltip="Start voice input">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+
+            <div id="voice-wave" class="voice-wave">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
-        </div>
-    </div>
-     </div>
-    <div class="chat-box-container">
-        <div class="chat-box" id="chatbox">
-            <p class="botText">
-            </p>
-        </div>
-    </div>
-    </div>
-    <br>
-    <div id="input-box-container">
-        <textarea id="text-box" placeholder="Enter a command or ask something! 😀"></textarea>
-        <button type="button" id="text-button">Submit</button>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const voicewave = document.getElementById("bars");
-    const closeButton = document.getElementById('close-button');
-    const microphone = document.getElementById('microphone');
-    const textBox = document.getElementById('text-box');
-    const textButton = document.getElementById('text-button');
-    let isListening = false;
-    // const chatbox = document.getElementById('chatbox');
-    textButton.disabled = true;
-textButton.style.backgroundColor = 'gray';
 
-function voiceInput() {
-    const recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-
-    let wakeWord = 'wakeup';
-    let sleepWord = 'sleep';
-    let inactiveTimeout = 600000; // 10 minutes in milliseconds
-    let lastActiveTime = Date.now();
-    let initialActive = false;
-    let active = false;
-
-    recognition.onresult = function(event) {
-        const text = event.results[0][0].transcript.toLowerCase();
-        
-        if (!initialActive) {
-            initialActive = true;
-            lastActiveTime = Date.now();
-            active = true;
-            console.log("You said: " + text);
-            return text;
-        }
-        
-        let currentTime = Date.now();
-
-        // Check if inactive for 10 minutes
-        if (currentTime - lastActiveTime >= inactiveTimeout) {
-            console.log("Inactive for 10 minutes. Sleeping...");
-            active = false;
-        }
-
-        if (text.includes(wakeWord)) {
-            console.log("Waking up...");
-            lastActiveTime = Date.now();
-            active = true;
-            return text;
-        }
-
-        if (text.includes(sleepWord)) {
-            console.log("Sleeping...");
-            active = false;
-        }
-
-        console.log("You said:", text);
-        lastActiveTime = Date.now();
-    };
-
-    recognition.onerror = function(event) {
-        console.error("Error recognizing audio:", event.error);
-    };
-
-    // Start listening for speech input
-    recognition.start();
-
-    // To stop listening, use:
-    // recognition.stop();
-}
-
-function stopListening() {
-        const recognition = new webkitSpeechRecognition();                                  // Stop Web Speech API recognition
-        console.log('Stop listening...');
-        recognition.stop();
-        closeButton.style.display = 'none'; // Hide the close button
-        microphone.style.display = 'block'; // Show the microphone button
-        voicewave.style.display = 'none';
-         // Hide the voice wave container
-    }
-    function startListening() {
-        isListening = true;
-        console.log('Start listening...');
-        textButton.disabled = true; // Disable the text button while listening
-        microphone.style.display = 'none'; // Hide the microphone button
-        voicewave.style.display = 'flex'; // Show the voice wave container
-        closeButton.style.display = 'block'; // Show the close button
-        transcript=voiceInput();    
-        sendMessage(transcript);
-    }
-    function sendMessage(message)
-    {
-        fetch('http://localhost:5000/send_message',{
-            method:'POST',
-            headers:{
-                
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({message:message})
-        })
-        .then(response=>
-        {
-                if(!response.ok)
-                {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-        .then(data=>{
-            if(data.message)
-            {
-                if(data.code)
-                {
-                    appendCode(data.code);
-                }
-                else{
-                    console.log('Response from backend',data.message)
-                    appendMessage('bot',data.message);
-                }
-            }
+            <button id="stop-button" data-tooltip="Stop listening">
+                <i class="fa-solid fa-stop"></i>
+            </button>
             
-            else{
-                console.error('Error:Response from backend is missing message');
+
+            <div class="loading-spinner"></div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // DOM Elements
+            const chatbox = document.getElementById('chatbox');
+            const voicewave = document.getElementById("voice-wave");
+            const stopButton = document.getElementById('stop-button');
+            const micButton = document.getElementById('micButton');
+            const textBox = document.getElementById('text-box');
+            const textButton = document.getElementById('text-button');
+            const uploadButton = document.getElementById("upload-button");
+            const fileInput = document.getElementById('file-input');
+            const voiceSelect = document.getElementById('voice-select');
+            const speechToggle = document.getElementById('speech-toggle');
+            const loadingSpinner = document.querySelector('.loading-spinner');
+            
+            // State variables
+            let isListening = false;
+            let isSpeaking = true;
+            let isProcessing = false;
+
+            // Initialize speech recognition
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            // Populate voice select dropdown
+            function populateVoiceSelect() {
+                const voices = speechSynthesis.getVoices();
+                voiceSelect.innerHTML = voices
+                    .map((voice, index) => `<option value="${index}">${voice.name}</option>`)
+                    .join('');
             }
-        })
-        .catch(error=>{
-            console.error('Error:',error);
-        });
-    }
+
+            // Handle voice loading
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = populateVoiceSelect;
+            } else {
+                // Fallback
+                setTimeout(populateVoiceSelect, 1000);
+            }
+
+            // Voice Wave Animation
+            function startVoiceWaveAnimation() {
+                if (!isListening) return;
+                
+                voicewave.style.display = 'flex';
+                const bars = voicewave.children;
+                for (let bar of bars) {
+                    const height = Math.random() * 30 + 10;
+                    bar.style.height = `${height}px`;
+                }
+                
+                requestAnimationFrame(startVoiceWaveAnimation);
+            }
+
+            // Speech Synthesis
+            function speak(text, callback) {
+                if (!isSpeaking || !text) {
+                    if (callback) callback();
+                    return;
+                }
+
+                text = text.replace(/\*/g, '').replace(/```([^`]+)```/g, ''); // Remove markdown
+                const voices = speechSynthesis.getVoices();
+                const selectedVoice = parseInt(voiceSelect.value, 10);
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                if (voices.length > 0 && selectedVoice <voices.length) {
+                    utterance.voice = voices[selectedVoice];
+                }
+
+                speechSynthesis.speak(utterance);
+                
+                utterance.onend = function() {
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                };
+                
+                utterance.onerror = function() {
+                    console.error("Speech synthesis error");
+                    if (callback) callback();
+                };
+            }
+
+            // Message Processing
+            function processMessage(message) {
+    if (!message) return;
     
-    function fetchSystemMessageFromBackend() {
-        fetch('/send_system_message',
-        {
-            method:'POST'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const systemMessage = data.message;
-            console.log('Received system message from backend:', systemMessage);
-            // Process the received system message as needed
-            appendMessage('Friday:',systemMessage);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle error conditions
-        });
-    }
-    fetchSystemMessageFromBackend();
-    function appendCode(code) {
-        const chatbox = document.getElementById('chatbox');
+    // Process code blocks first
+    const codePattern = /```(\w+)?\n([\s\S]*?)```/g;
+    let lastIndex = 0;
+    let match;
+    let processedMessage = "";
+    
+    while ((match = codePattern.exec(message)) !== null) {
+        // Add text before code block
+        if (match.index > lastIndex) {
+            const textBefore = message.substring(lastIndex, match.index);
+            processedMessage += textBefore;
+        }
+        
+        // Add code block as HTML
+        const language = match[1] || '';
+        const code = match[2];
+        
+        const languageElement = document.createElement('h2');
+        languageElement.textContent = language;
+        chatbox.appendChild(languageElement);
+        
+        const preElement = document.createElement('pre');
         const codeElement = document.createElement('code');
         codeElement.textContent = code;
-        const preElement = document.createElement('pre');
         preElement.appendChild(codeElement);
         chatbox.appendChild(preElement);
+        
+        lastIndex = match.index + match[0].length;
     }
-    function adjustSizes() {
-                microphone.style.width = '100px';
-                microphone.style.height = '100px';
-                closeButton.style.fontSize = '20px';
-                voicewave.style.height = '50px';
-            }
-    function appendMessage(sender,message) {
-        const chatbox = document.getElementById('chatbox');
-        const messageElement = document.createElement('p');
-        messageElement.textContent = sender+":"+message;
-        if (sender === 'user') {
-            messageElement.className = 'userText';
-        } else if (sender === 'Friday') {
-            messageElement.className = 'botText';
-        }
-        chatbox.appendChild(messageElement);
+    
+    // Add remaining text
+    if (lastIndex < message.length) {
+        const remainingText = message.substring(lastIndex);
+        processedMessage += remainingText;
     }
-    // Add an input event listener to the text box
-    textBox.addEventListener('input', function() {
-    // Check if the text box is empty
-    if (textBox.value.trim() === '') {
-        // If it's empty, disable the text button and change its background color to gray
-        textButton.disabled = true;
-        textButton.style.backgroundColor = 'gray';
-    } else {
-        // If there is text, enable the text button and set its background color to green
+    
+    // Process remaining text with Markdown-like formatting
+    if (processedMessage) {
+        // Update appendMessage to handle Markdown-like formatting
+        appendMessageWithMarkdown('ROLEX', processedMessage);
+    }
+    
+    // Speak the cleaned text (remove markdown for speech)
+    const cleanedText = message.replace(/\*\*(.*?)\*\*/g, '$1')  // Bold
+                             .replace(/\*(.*?)\*/g, '$1')        // Italic
+                             .replace(/\_\_(.*?)\_\_/g, '$1')     // Underline
+                             .replace(/\[(.*?)\]\((.*?)\)/g, '$1') // Links
+                             .replace(/```([^`]+)```/g, '');     // Code blocks
+    
+    speak(cleanedText, function() {
+        isProcessing = false;
         textButton.disabled = false;
-        textButton.style.backgroundColor = 'rgb(49, 246, 15)'; // Green color
-    }
-});
-textBox.addEventListener('keypress',function(event)
-{
-    if(event.key==='Enter')
-    {
-        const message = textBox.value.trim();
-        appendMessage('user',message);
-        sendMessage(message);
-        function adjustSizes() {
-                microphone.style.width = '100px';
-                microphone.style.height = '100px';
-                closeButton.style.fontSize = '20px';
-                voicewave.style.height = '50px';
-            }
-        textBox.value = '';
-    }
-})
-textButton.addEventListener('click', function() {
-    const message = textBox.value.trim();
-    if (message !== '') {
-        // Send text message to backend
-        sendMessage(message,isVoice=false);
-        textBox.value = '';
-    }
-});
-microphone.addEventListener('click', function() {
-    console.log('Microphone clicked');
-    startListening(); // Start listening to the microphone
-});
-
-closeButton.addEventListener('click', function() {
-    console.log('Close button clicked');
-    if (isListening) {
-        stopListening(); // Stop listening to the microphone
-    }
-});
-document.getElementById('restart-button').addEventListener('click', function() {
-    fetch('/restart_backend', {
-        method: 'POST'
-    })
-    .then(response => 
-    {
-        if(response.ok)
-        {
-            window.close();
-        }
-        else{
-            console.error('Failed to restart backend.');
-            alert('Failed to restart backend.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while restarting the backend.');
-        });
+        loadingSpinner.style.display = 'none';
     });
-});
+}
+
+// New function to handle Markdown-like formatting
+            function appendMessageWithMarkdown(sender, message) {
+    const messageElement = document.createElement('div');
+    messageElement.className = sender === 'user' ? 'userText' : 'botText';
+    
+    // Process basic Markdown
+    let formattedMessage = message
+        // Bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Links
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<ahref="$2" target="_blank">$1</a>')
+        // Lists (basic support)
+        .replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>')
+        // Paragraphs
+        .split('\n\n').join('</p><p>');
+    
+    // Wrap in paragraph if not already
+    if (!formattedMessage.startsWith('<p>')) {
+        formattedMessage = `<p>${formattedMessage}</p>`;
+    }
+    
+    // Convert consecutive list items to proper lists
+    formattedMessage = formattedMessage.replace(/<li>(.*?)<\/li>(\s*<li>.*?<\/li>)+/g, function(match) {
+        return '<ul>' + match + '</ul>';
+    });
+    
+    messageElement.innerHTML = formattedMessage;
+    
+    // Add with animation delay
+    setTimeout(() => {
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight;
+        
+        // Add a subtle highlight effect
+        messageElement.style.backgroundColor = sender === 'user' ? '#82ECEC' : '#444';
+        setTimeout(() => {
+            messageElement.style.backgroundColor = sender === 'user' ? '#69E5E5' : '#333';
+            messageElement.style.transition = 'background-color 1s ease';
+        }, 300);
+    }, sender === 'user' ? 0 : 500);
+}        
+            async function sendMessage(message) {
+                document.body.classList.add('processing');
+                if (!message || isProcessing) return;
+                
+                isProcessing = true;
+                textButton.disabled = true;
+                loadingSpinner.style.display = 'inline-block';
+                
+                appendMessageWithMarkdown('user', message);
+                textBox.value = '';
+                
+                try {
+                    const response = await fetch('/send_message', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    
+                    const data = await response.json();
+                    if (data.message) {
+                        processMessage(data.message);
+                    } else {
+                        throw new Error('Empty response received');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    appendMessageWithMarkdown('ROLEX', 'Sorry, I encountered an error processing your request.');
+                    isProcessing = false;
+                    textButton.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                }
+                document.body.classList.remove('processing');
+            }
+            function sendsystemMessage(){
+                const message="hi";
+                sendMessage(message);
+            }
+            sendsystemMessage();
+            async function handleFileUpload() {
+                document.body.classList.add('processing');
+                const file = fileInput.files[0];
+                if (!file || isProcessing) return;
+                
+                if (!file.name.endsWith('.pdf')) {
+                    alert('Only PDF files are allowed.');
+                    return;
+                }
+                
+                isProcessing = true;
+                loadingSpinner.style.display = 'inline-block';
+                appendMessageWithMarkdown('user', `Uploading: ${file.name}`);
+                
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                try {
+                    const response = await fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    
+                    const data = await response.json();
+                    if (data.message) {
+                        processMessage(data.message);
+                    } else {
+                        throw new Error('Empty response received');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    appendMessageWithMarkdown('ROLEX', 'Sorry, I encountered an error processing your file.');
+                    isProcessing = false;
+                    loadingSpinner.style.display = 'none';
+                }
+                
+                // Reset file input
+                fileInput.value = '';
+                document.body.classList.remove('processing');
+            }
+
+            // Voice Recognition Functions
+            function startListening() {
+                if (isListening || isProcessing) return;
+                
+                isListening = true;
+                micButton.style.display = 'none';
+                stopButton.style.display = 'flex';
+                voicewave.style.display = 'flex';
+                startVoiceWaveAnimation();
+                
+                recognition.start();
+            }
+
+            function stopListening() {
+                if (!isListening) return;
+                
+                isListening = false;
+                micButton.style.display = 'flex';
+                stopButton.style.display = 'none';
+                voicewave.style.display = 'none';
+                
+                recognition.stop();
+                speechSynthesis.cancel();
+            }
+
+            // Event Listeners
+            recognition.onresult = function(event) {
+                const text = event.results[event.results.length - 1][0].transcript;
+                if (isListening && text.trim()) {
+                    stopListening();
+                    sendMessage(text);
+                }
+            };
+
+            recognition.onend = function() {
+                if (isListening) {
+                    recognition.start();
+                }
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Speech recognition error:", event.error);
+                stopListening();
+            };
+
+            micButton.addEventListener('click', startListening);
+            stopButton.addEventListener('click', stopListening);
+            
+            textBox.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    const message = textBox.value.trim();
+                    if (message) {
+                        sendMessage(message);
+                    }
+                }
+            });
+
+            textButton.addEventListener('click', () => {
+                const message = textBox.value.trim();
+                if (message) {
+                    sendMessage(message);
+                }
+            });
+            
+            speechToggle.addEventListener('change', function() {
+                isSpeaking = this.checked;
+            });
+            
+            fileInput.addEventListener('change', handleFileUpload);
+            uploadButton.addEventListener('click', () => fileInput.click());
+            
+            // Initialize
+            populateVoiceSelect();
+        });
     </script>
 </body>
 </html>
