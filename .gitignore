@@ -1,5 +1,5 @@
 venv/
-
+instance/
 .env
 message.txt
 agentops.log
