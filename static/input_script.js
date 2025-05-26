@@ -284,8 +284,14 @@ then(response => {
             function fetchSystemMessageFromBackend() {
                 if(checkInternetConnection())
                 {
-                    fetch('/send_system_message', {
-                        method: 'POST'
+                    fetch('/send_message', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
                     })
                     .then(response => {
                         if (!response.ok) {
@@ -341,7 +347,7 @@ then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
                         }
-                        return response.json();
+                        return response.text();
                     })
                     .then(data => {
                         if (data.message) {
@@ -489,11 +495,11 @@ then(response => {
                         mic=false;
                         stopListening();
                     }
-                    textButton.style.backgroundColor = 'gray';
+                    textButton.style.backgroundColor = 'rgb(105, 229, 229)';//aqua
                 } else {
                     // If there is text, enable the text button and set its background color to green
                     textButton.disabled = false;
-                    textButton.style.backgroundColor = 'rgb(49, 246, 15)'; // Green color
+                    textButton.style.backgroundColor = 'rgb(9, 122, 234)'; // blue color
                 }
             });
             textBox.addEventListener('keypress', function (event) {
@@ -550,7 +556,7 @@ then(response => {
                 stopListening(); // Stop listening to the microphon
             });
 
-            document.getElementById('restart-button').addEventListener('click', function () {
+            document.getElementById('restart-button').addEventListener('click', function(){
                 fetch('/restart_backend', {
                         method: 'POST'
                     })

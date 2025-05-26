@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Input Validation</title>
+  <script>
+    function validateForm() {
+      var rollno = document.getElementById("rollno").value;
+      var name = document.getElementById("name").value;
+
+      if (rollno == "" || rollno.length < 6) {
+        alert("Roll number must be at least 6 characters long.");
+        return false;
+      }
+
+      if (name == "" || name.length < 10) {
+        alert("Name must be at least 10 characters long.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <form onsubmit="return validateForm();">
+    <label for="rollno">Roll No:</label>
+    <input type="text" id="rollno" name="rollno"><br><br>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>

@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Your animation code here
     // $( ". selector" ). loader( "hide" ); 
-    var words = ["Hello there!","I am Friday","Your personalised voice assistant"],
+    var words = ["Hello there!","I am Rolex","Your personalised voice assistant"],
         part,
         i = 0,
         offset = 0,
@@ -9,7 +9,7 @@ $(document).ready(function() {
         forwards = true,
         skip_count = 0,
         skip_delay = 10,
-        speed = 80;
+        speed = 50;
 
     var wordflick = function() {
         setInterval(function() {
@@ -165,7 +165,7 @@ $(document).ready(function() {
                 {
                     $('#popup').css('display', 'none');
                     document.getElementById("loader").style.display = "grid";
-                    window.location.href = window.location.href+'no_camera_input';
+                    window.location.href = window.location.href+'input';
                 }
             })
             .catch(error => {
